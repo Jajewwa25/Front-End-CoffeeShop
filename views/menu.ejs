@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>food menu</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+   
+<header class="header">
+
+   <section class="flex">
+
+      <a href="home.html" class="logo">Coffee Shop ☕</a>
+
+      <nav class="navbar">
+         <a href="home.html">home</a>
+         <a href="about.html">about</a>
+         <a href="menu.html">menu</a>
+         <a href="orders.html">orders</a>
+         <a href="contact.html">contact</a>
+      </nav>
+
+      <div class="icons">
+         <a href="search.html"><i class="fas fa-search"></i></a>
+         <a href="cart.html"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
+         <div id="user-btn" class="fas fa-user"></div>
+         <div id="menu-btn" class="fas fa-bars"></div>
+      </div>
+
+      <div class="profile">
+         <p class="name">shaikh anas</p>
+         <div class="flex">
+            <a href="profile.html" class="btn">profile</a>
+            <a href="#" class="delete-btn">logout</a>
+         </div>
+         <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
+      </div>
+
+   </section>
+
+</header>
+
+<div class="heading">
+   <h3>our menu</h3>
+   <p><a href="home.html">home </a> <span> / menu</span></p>
+</div>
+
+<section class="products">
+
+   <h1 class="title">Drinks</h1>
+
+   <div class="box-container">
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof1.png" alt="">
+         <a href="category.html" class="cat">Coffee</a>
+         <div class="name">Latte</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>45<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            <br>
+               <td>size : </td>
+               <td align="center">
+               <input type="radio" name="1" value="Tall">Tall</td>
+               <input type="radio" name="2" value="Grande">Grande</br>
+               <input type="radio" name="3" value="Venti">Venti<br>
+               </td>
+            </tr>
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof2.png" alt="">
+         <a href="category.html" class="cat">Coffee</a>
+         <div class="name">Americano</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>40<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof5.png" alt="">
+         <a href="category.html" class="cat">Coffee</a>
+         <div class="name">Espresso</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>40<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof4.png" alt="">
+         <a href="category.html" class="cat">Milk</a>
+         <div class="name">Roast Cocoa Milk Champurrado</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>75<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof3.png" alt="">
+         <a href="category.html" class="cat">Smoothie</a>
+         <div class="name">Strawberry Smoothie</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>55<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/cof6.png" alt="">
+         <a href="category.html" class="cat">Drinks</a>
+         <div class="name">Orange Juice</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>35<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+   </div>
+
+</section>
+
+<section class="products">
+
+   <h1 class="title">Desserts</h1>
+
+   <div class="box-container">
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/f2.png" alt="">
+         <a href="category.html" class="cat">Dessert</a>
+         <div class="name">Hazelnut Burnt Butter Slice</div>
+         <div class="flex">
+            <div class="price"><span>$</span>3<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/f3.png" alt="">
+         <a href="category.html" class="cat">Dessert</a>
+         <div class="name">Sourdough Maritozzi</div  >
+         <div class="flex">
+            <div class="price"><span>฿</span>125<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/f1.png" alt="">
+         <a href="category.html" class="cat">Dessert</a>
+         <div class="name">Dark Chocolate Cookie.</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>89<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+      <form accept="" method="post" class="box">
+         <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+         <img src="uploaded_img/f7.png" alt="">
+         <a href="category.html" class="cat">Foods</a>
+         <div class="name">Waffles</div>
+         <div class="flex">
+            <div class="price"><span>฿</span>219<span>/-</span></div>
+            <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+         </div>
+      </form>
+
+   </div>
+   </section>
+
+   <section class="products">
+
+      <h1 class="title">Foods</h1>
+   
+      <div class="box-container">
+   
+         <form accept="" method="post" class="box">
+            <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+            <img src="uploaded_img/f4.png" alt="">
+            <a href="category.html" class="cat">Foods</a>
+            <div class="name">Hamburger</div>
+            <div class="flex">
+               <div class="price"><span>฿</span>159<span>/-</span></div>
+               <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </form>
+   
+         <form accept="" method="post" class="box">
+            <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+            <img src="uploaded_img/f6.png" alt="">
+            <a href="category.html" class="cat">Foods</a>
+            <div class="name">Taco</div  >
+            <div class="flex">
+               <div class="price"><span>฿</span>129<span>/-</span></div>
+               <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </form>
+   
+         <form accept="" method="post" class="box">
+            <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+            <img src="uploaded_img/f5.png" alt="">
+            <a href="category.html" class="cat">Foods</a>
+            <div class="name">Breakfast set</div>
+            <div class="flex">
+               <div class="price"><span>฿</span>219<span>/-</span></div>
+               <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </form>
+
+         <form accept="" method="post" class="box">
+            <button class="fas fa-shopping-cart" type="submit" name="add_to_cart"></button>
+            <img src="uploaded_img/f8.png" alt="">
+            <a href="category.html" class="cat">Foods</a>
+            <div class="name">The Poacher Hash</div>
+            <div class="flex">
+               <div class="price"><span>฿</span>119<span>/-</span></div>
+               <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;">
+            </div>
+         </form>
+   
+   
+      </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <footer class="footer">
+
+         <section class="box-container">
+      
+            <div class="box">
+               <img src="images/email-icon.png" alt="">
+               <h3>our email</h3>
+               <a href="coffeeshop@gmail.com">coffeeshop@gmail.com</a>
+            </div>
+      
+            <div class="box">
+               <img src="images/clock-icon.png" alt="">
+               <h3>opening hours</h3>
+               <p>9:00 am to 5:00 pm </p>
+            </div>
+      
+            <div class="box">
+               <img src="images/map-icon.png" alt="">
+               <h3>our address</h3>
+               <a href="https://www.google.com/maps">KMUTNB Prachinburi 25230</a>
+            </div>
+      
+            <div class="box">
+               <img src="images/phone-icon.png" alt="">
+               <h3>our number</h3>
+               <a href="tel:1234567890">+123-456-7890</a>
+               <a href="tel:1112223333">+111-222-3333</a>
+            </div>
+      
+         </section>
+      
+         <div class="credit">Life can be tough, coffee helps</div>
+      
+      </footer>
+      
+      
+
+<div class="loader">
+   <img src="images/loader.gif" alt="">
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
