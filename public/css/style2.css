@@ -86,7 +86,7 @@ body{
   }
   
   a:hover {
-    border-bottom-color: #fed330;
+    border-bottom-color: #222;
   }
   
   .link-center {
@@ -97,7 +97,7 @@ body{
   .link-center a {
     display: inline-block;
     margin: 10px;
-    color: #fed330;
+    color: #222;
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
@@ -106,7 +106,7 @@ body{
   }
   
   .link-center a:hover {
-    border-bottom-color: #fed330;
+    border-bottom-color: #000000;
   }
   
   /* Style the table */
@@ -115,7 +115,7 @@ body{
     width: 75%;
     margin: 0 auto; /* center the table */
     margin-bottom: 20px;
-    border-bottom: 2px solid#fed330;
+    border-bottom: 2px solid#000000;
   }
   
   th,
