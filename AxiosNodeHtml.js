@@ -3,7 +3,7 @@ const axios = require("axios");
 const app = express();
 var bodyParser = require("body-parser");
 
-const base_url = "http://node57065-jutarat-noderest.proen.app.ruk-com.cloud/";
+const base_url = "http://node59553-env-5865143.proen.app.ruk-com.cloud:11485";
 //"body-parser": "^1.20.2",
 
 app.set("view engine", "ejs");
