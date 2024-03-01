@@ -14,24 +14,24 @@
 
 </head>
 <body>
-   
+
 <header class="header">
 
    <section class="flex">
 
-      <a href="home.html" class="logo">Coffee Shop ☕</a>
+      <a href="home.ejs" class="logo">Coffee Shop ☕</a>
 
       <nav class="navbar">
-         <a href="home.html">home</a>
-         <a href="about.html">about</a>
-         <a href="menu.html">menu</a>
-         <a href="orders.html">orders</a>
-         <a href="contact.html">contact</a>
+         <a href="home.ejs">home</a>
+         <a href="about.ejs">about</a>
+         <a href="menu.ejs">menu</a>
+         <a href="orders.ejs">orders</a>
+         <a href="contact.ejs">contact</a>
       </nav>
 
       <div class="icons">
-         <a href="search.html"><i class="fas fa-search"></i></a>
-         <a href="cart.html"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
+         <a href="search.ejs"><i class="fas fa-search"></i></a>
+         <a href="cart.ejs"><i class="fas fa-shopping-cart"></i><span>(3)</span></a>
          <div id="user-btn" class="fas fa-user"></div>
          <div id="menu-btn" class="fas fa-bars"></div>
       </div>
@@ -39,10 +39,10 @@
       <div class="profile">
          <p class="name">shaikh anas</p>
          <div class="flex">
-            <a href="profile.html" class="btn">profile</a>
+            <a href="profile.ejs" class="btn">profile</a>
             <a href="#" class="delete-btn">logout</a>
          </div>
-         <p class="account"><a href="login.html">login</a> or <a href="register.html">register</a></p>
+         <p class="account"><a href="login.ejs">login</a> or <a href="register.ejs">register</a></p>
       </div>
 
    </section>
@@ -56,7 +56,7 @@
       <input type="email" required maxlength="50" name="email" placeholder="enter your email" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="password" required maxlength="20" name="pass" placeholder="enter your password" class="box" oninput="this.value = this.value.replace(/\s/g, '')">
       <input type="submit" value="login now" class="btn" name="submit">
-      <p>don't have an account? <a href="register.html">register now</a></p>
+      <p>don't have an account? <a href="register.ejs">register now</a></p>
    </form>
 
 </section>
