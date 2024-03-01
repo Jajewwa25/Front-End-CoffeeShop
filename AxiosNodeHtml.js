@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", async (req, res) => {
+/*app.get("/", async (req, res) => {
   try {
       const response = await axios.get(base_url + "/product/" + req.params.id);
       res.render("menu", { shop: product.data});
@@ -20,7 +20,7 @@ app.get("/", async (req, res) => {
       console.error(err);
       res.status(500).send('Error menu')
   }
-});
+});*/
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
