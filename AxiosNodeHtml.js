@@ -35,6 +35,16 @@ app.get("/login",(req, res) => {
   }
 });
 
+app.get("/Register",(req, res) => {
+  try {
+    res.render("Register");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
 app.get("/about",(req, res) => {
   try {
     res.render("about");
