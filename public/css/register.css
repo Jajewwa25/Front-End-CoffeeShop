@@ -26,6 +26,7 @@ img {
     margin: 4px 2px; /* ระยะห่างของขอบ */
     cursor: pointer; /* ปลายเมาส์แสดงเป็นปุ่ม */
     border-radius: 8px; /* มุมโค้งขอบ */
+    
 }
 
 .form-container {
