@@ -11,6 +11,7 @@ const base_url = "http://localhost:3000/";
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.set("views", path.join(__dirname, "/public/views"));
 
 app.use(express.static(__dirname + "/public"));
 
@@ -19,6 +20,16 @@ app.get("/", async (req, res) => {
   const response = await axios.get(base_url + "/Customers");
   res.render("login", {Customer : response.data});
 
+});
+
+app.get("/order",(req, res) => {
+  try {
+    res.render("order");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
 });
 
 app.listen(5500, () => {
