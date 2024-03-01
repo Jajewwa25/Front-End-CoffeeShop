@@ -15,14 +15,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 
 app.get("/", async (req, res) => {
-  try {
-    const response = await axios.get(base_url + "/Address");
-    res.render("home", { Address: response.data });
-  } catch (err) {
-      console.error(err);
-      res.status(500).send('Error menu')
-  }
+
+  const response = await axios.get(base_url + "/Customers");
+  res.render("login", {Customer : response.data});
+
 });
+
 
 app.get("/create", (req, res) => {
   res.render("create");
