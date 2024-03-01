@@ -37,6 +37,7 @@ app.get("/login",(req, res) => {
 
 app.get("/about",(req, res) => {
   try {
+    console.log("hello");
     res.render("about");
   } catch (err) {
     console.error(err);
