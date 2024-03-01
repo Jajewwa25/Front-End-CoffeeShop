@@ -32,6 +32,16 @@ app.get("/order",(req, res) => {
   }
 });
 
+app.get("/login",(req, res) => {
+  try {
+    res.render("login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
 app.listen(5500, () => {
   console.log("server started on port 5500");
 });
