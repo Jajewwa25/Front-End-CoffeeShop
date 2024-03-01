@@ -1,7 +1,10 @@
-body {
-    font-family: "Open Sans", sans-serif;
-    font-size: 16px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap');
+
+body{
+  font-family: "Anuphan", sans-serif;
+  font-style: normal;
+}
+
   
   /* Center the main heading */
   h1 {
