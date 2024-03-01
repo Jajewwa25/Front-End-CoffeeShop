@@ -15,8 +15,8 @@ img {
 }
 
 .custom-button {
-    background-color: #d57bb5; /* กำหนดสีเขียว */
-    color: white; /* กำหนดสีของตัวอักษร */
+    background-color: #fed330; /* กำหนดสีเขียว */
+    color: black; /* กำหนดสีของตัวอักษร */
     border: none; /* ไม่มีเส้นขอบ */
     padding: 10px 20px; /* ระยะห่างภายใน */
     text-align: center; /* จัดข้อความตรงกลาง */
@@ -30,7 +30,7 @@ img {
 }
 
 .form-container {
-    border: 1px solid #0a0a0a; /* สีเส้นขอบ */
+    border: 1px solid #fed330; /* สีเส้นขอบ */
     border-radius: 5px; /* มุมขอบโค้ง */
     padding: 20px; /* ระยะห่างภายใน */
     width: 700px; /* กำหนดความกว้าง */
