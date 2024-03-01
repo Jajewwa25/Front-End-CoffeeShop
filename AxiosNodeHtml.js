@@ -15,13 +15,6 @@ app.set("views", path.join(__dirname, "/public/views"));
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", async (req, res) => {
-
-  const response = await axios.get(base_url + "/Customers");
-  res.render("login", {Customer : response.data});
-
-});
-
 app.get("/order",(req, res) => {
   try {
     res.render("order");
