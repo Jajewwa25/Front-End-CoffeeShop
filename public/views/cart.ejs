@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+    <header>
+        <h1>Shopping Cart</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Your Cart</h2>
+        <div class="cart-items">
+            <!-- สินค้าที่เพิ่มในตะกร้าจะแสดงที่นี่ -->
+            <div class="cart-item">
+                <img src="product1.jpg" alt="Product 1">
+                <p>Product 1</p>
+                <p>$10.00</p>
+                <button class="remove-btn">Remove</button>
+            </div>
+            <div class="cart-item">
+                <img src="product2.jpg" alt="Product 2">
+                <p>Product 2</p>
+                <p>$15.00</p>
+                <button class="remove-btn">Remove</button>
+            </div>
+        </div>
+
+        <div class="cart-total">
+            <h3>Total:</h3>
+            <span>$25.00</span>
+        </div>
+
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </main>
+</body>
+</html>
