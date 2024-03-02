@@ -221,7 +221,6 @@ app.get("/updatemenu",async (req, res) => {
   }
 });
 
-
 app.listen(5500, () => {
   console.log("server started on port 5500");
 });

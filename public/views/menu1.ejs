@@ -16,7 +16,6 @@
             <li><a href="/menu">Menu</a></li>
             <li><a href="/order">order</a></li>
             <li><a href="/customer">updatecustomer</a></li>
-            <li><a href="/updatemenu">updatemenu</a></li>
         </ul>
     </nav>
 </header>
@@ -60,8 +59,8 @@
             </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
-               
          </div>
+         <a href="/updatemenu/<%=Item[0].item_id%>">Edit</a>
          <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
