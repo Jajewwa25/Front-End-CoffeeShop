@@ -168,7 +168,7 @@ app.get("/employee/:id", async(req, res) => {
 });
 
 
-app.get("/updatemenu/:id", async (req, res) => {
+app.get("/updatemenu", async (req, res) => {
   try {
     const response = await axios.get(base_url + "/Item/" + req.params.id);
     res.render("updatemenu", { Item: response.data });
@@ -209,7 +209,7 @@ app.get("/cart",(req, res) => {
   }
 });
 
-app.get("/updatemenu",async (req, res) => {
+/*app.get("/updatemenu",async (req, res) => {
   try {
     const response = await axios.get(base_url + "/updatemenu")
     console.log(response.data);
@@ -219,7 +219,7 @@ app.get("/updatemenu",async (req, res) => {
     res.status(500).send("error");
     res.redirect("/");
   }
-});
+});*/
 
 
 app.listen(5500, () => {
