@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap');
+
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* สไตล์ของหน้าเว็บ */
+body {
+    font-family: "Anuphan", sans-serif;
+    font-style: normal;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+section.reviews div{
+    text-align: center;
+    max-width: 800px;
+    overflow: hidden;
+    border: 2px solid #333; /* เพิ่ม border */
+    border-radius: 50px; /* เพิ่ม border-radius เพื่อทำให้มีเส้นมนสวยงาม */
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    width: 20%; /* ลดความกว้างของกรอบสี่เหลี่ยม */
+    display: inline-block;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+section.reviews .title {
+    margin-bottom: 20px;
+}
+
+section.reviews .employee {
+    margin-bottom: 40px;
+    margin: 0 20px;
+    flex: 0 0 calc(33.33% - 40px);
+}
+
+section.reviews div img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50px;
+    margin-bottom: 10px;
+}
+
+section.reviews div h3, section.reviews div p {
+    
+    margin: 0; /* เพิ่ม */
+    line-height: 1.6; /* เพิ่ม */
+    overflow: hidden; /* เพิ่ม */
+}
+
+section.box-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+section.box-container .box {
+    width: 45%;
+    margin-bottom: 200px;
+}
+
+section.box-container .box img {
+    width: 15px; /* ปรับความกว้างของรูปให้เล็กลง */
+    height: 15px; /* ให้สูงปรับตามอัตราส่วน */
+    margin-bottom: 10px;
+}
+
+section.box-container .box h3 {
+    margin-bottom: 5px;
+}
+
+.credit {
+    text-align: center;
+    
+    color: #fff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.home-link {
+    display: inline-block; /* ตั้งค่า display เป็น inline-block เพื่อให้ไอคอนเป็นบล็อก */
+    margin-top: 20px; /* ระยะห่างด้านบน */
+
+}
+
+.home-icon {
+    width: 40px; /* กำหนดความกว้างของไอคอน */
+    height: 40px; /* กำหนดความสูงของไอคอน */
+    
+}
