@@ -9,13 +9,6 @@
 <body>
     <header>
         <h1>Shopping Cart</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="cart.html">Cart</a></li>
-            </ul>
-        </nav>
     </header>
 
     
@@ -59,16 +52,15 @@
 
         <div id="shopping-cart">
             <div id="item1">
-                <img src="../uploaded_img/cof1png.jpg" alt="Product 1">
                 <p>Product 1</p>
                 <span class="item-price">$10.00</span>
-                <button onclick="removeItem('item1')">Remove Item</button>
+                <button class="checkout-btn" onclick="removeItem('item1')">Remove Item</button>
             </div>
+            <br>
             <div id="item2">
-                <img src="../uploaded_img/dessert-1.png" alt="Product 2">
                 <p>Product 2</p>
                 <span class="item-price">$20.00</span>
-                <button onclick="removeItem('item2')">Remove Item</button>
+                <button class="checkout-btn" onclick="removeItem('item2')">Remove Item</button>
             </div>
         </div>
 
@@ -77,7 +69,8 @@
             <span id="total-amount">$0.00</span>
         </div>
 
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn"><a href="/menu">Back</a></button>
+        <button class="checkout-btn"><a href="/order">Pay</a></button>
     </main>
 </body>
 </html>
