@@ -8,7 +8,6 @@ body{
 header {
   background-color: #fed330;
   color: black;
-  padding-top: 0px;
   padding: 20px;
   text-align: center;
 }
@@ -70,3 +69,6 @@ nav ul li a {
   .card-header h3 {
     margin: 0; /* ลบระยะห่างขอบของ h3 */
   }
+
+
+  
