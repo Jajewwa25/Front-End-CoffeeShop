@@ -16,11 +16,12 @@ app.set("views", path.join(__dirname, "/public/views"));
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/order",(req, res) => {
+app.get("/order", async(req, res) => {
   try {
-    res.render("order");
+    const response = await axios.get(base_url + "/order")
+    console.log(response.data);
+    res.render("order", {order:response.data});
   } catch (err) {
-    console.error(err);
     res.status(500).send("error");
     res.redirect("/");
   }
