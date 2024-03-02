@@ -120,9 +120,70 @@ app.get("/deletecustomer/:id", async (req, res) => {
   }
 });
 
+//--------------------------------------
 
+app.get("/employee", async(req, res) => {
+  try {
+    const response = await axios.get(base_url + "/employee")
+    console.log(response.data);
+    res.render("employee", {employee:response.data});
+  } catch (err) {
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
 
+app.get("/employee/:id", async(req, res) => {
+  try {
+    const response = await axios.get(base_url + "/employee/" + req.params.id)
+    res.render("oneemployee", {employee:response.data});
+  } catch (err) {
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
 
+app.get("/updateemployee/:id", async (req, res) => {
+  try {
+    const response = await axios.get(base_url + "/employee/" + req.params.id);
+    res.render("updateemployee", { employee: response.data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.post("/updateemployee/:id", async (req, res) => {
+  try {
+    const data = { username: req.body.username, tel: req.body.tel,
+      email:req.body.email,date:req.body.date };
+    await axios.put(base_url + "/employee/" + req.params.id, data);
+    res.redirect("/employee/" + req.params.id);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.get("/deleteemployee/:id", async (req, res) => {
+  try {
+    await axios.delete(base_url + "/employee/" + req.params.id);
+    res.redirect("/employee");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.get("/cart",(req, res) => {
+  try {
+    res.render("cart");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
 
 
 app.listen(5500, () => {
