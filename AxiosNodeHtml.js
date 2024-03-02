@@ -56,6 +56,16 @@ app.get("/about",(req, res) => {
   }
 });
 
+app.get("/menu",(req, res) => {
+  try {
+    res.render("menu");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
