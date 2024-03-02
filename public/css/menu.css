@@ -26,21 +26,7 @@ nav ul li a {
   text-decoration: none;
 }
 
-.container {
-    display: flex;
-    flex-direction: row; /* จัดรูปแนวนอน */
-    border: 1px solid white; /* กำหนดขอบของกรอบ */
-    margin: 0 auto;
-  }
-  
-.content {
-    width: 100%; /* ทำให้เนื้อหาเต็มความกว้างของ container */
-}
 
-.card{
-    margin-right: 60px;
-    margin: 0 auto;
-}
 
 .custom-button {
     background-color: #fed330; /* สีน้ำตาล */
@@ -69,6 +55,7 @@ nav ul li a {
   .card-header h3 {
     margin: 0; /* ลบระยะห่างขอบของ h3 */
   }
+  
 
 
   
