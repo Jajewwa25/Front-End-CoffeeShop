@@ -18,30 +18,67 @@
         </nav>
     </header>
 
+    
     <main>
+
+        <script>
+            // JavaScript function to remove an item from the shopping cart
+            function removeItem(itemId) {
+                var item = document.getElementById(itemId);
+                if (item) {
+                    item.remove();
+                }
+            }
+
+            function calculateTotalPrice() {
+                var items = document.querySelectorAll('.item-price');
+                var totalPrice = 0;
+                items.forEach(function(item) {
+                    totalPrice += parseFloat(item.textContent.replace('$', ''));
+                });
+                document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
+            }
+
+                // JavaScript function to remove an item from the shopping cart and update total price
+    function removeItem(itemId, price) {
+        var item = document.getElementById(itemId);
+        if (item) {
+            var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('$', ''));
+            var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('$', ''));
+            totalPrice -= itemPrice;
+            document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
+            item.remove();
+        }
+    }
+        
+            // Call the function to calculate total price when the page loads
+            window.onload = calculateTotalPrice;
+        </script>
+    
         <h2>Your Cart</h2>
-        <div class="cart-items">
-            <!-- สินค้าที่เพิ่มในตะกร้าจะแสดงที่นี่ -->
-            <div class="cart-item">
-                <img src="product1.jpg" alt="Product 1">
+
+        <div id="shopping-cart">
+            <div id="item1">
+                <img src="../uploaded_img/cof1png.jpg" alt="Product 1">
                 <p>Product 1</p>
-                <p>$10.00</p>
-                <button class="remove-btn">Remove</button>
+                <span class="item-price">$10.00</span>
+                <button onclick="removeItem('item1')">Remove Item</button>
             </div>
-            <div class="cart-item">
-                <img src="product2.jpg" alt="Product 2">
+            <div id="item2">
+                <img src="../uploaded_img/dessert-1.png" alt="Product 2">
                 <p>Product 2</p>
-                <p>$15.00</p>
-                <button class="remove-btn">Remove</button>
+                <span class="item-price">$20.00</span>
+                <button onclick="removeItem('item2')">Remove Item</button>
             </div>
         </div>
 
         <div class="cart-total">
             <h3>Total:</h3>
-            <span>$25.00</span>
+            <span id="total-amount">$0.00</span>
         </div>
 
         <button class="checkout-btn">Proceed to Checkout</button>
     </main>
 </body>
 </html>
+

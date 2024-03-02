@@ -8,19 +8,26 @@
 </head>
 <body>
     <br><br><br><br>
-    <h1> Order Datails </h1>
+    <h1> Order Details </h1>
+    <% for(var i = 0; i < order.length; i++){%>
     <form method="post" action="/create">
-        <label for="orderDate">Order Date : </label>
-        <input type="text" name="orderDate" id="orderDate"/>
-        <label for="employee_id">Employee ID : </label>
-        <input type="text" name="employee_id" id="employee_id"/>
-        <label for="customer_id">Customer ID : </label>
-        <input type="text" name="customer_id" id="customer_id"/>
-        <label for="tax_id">Tax ID :</label>
-        <input type="tax_id" name="tax_id" id="tax_id"/>
-    <br/>
+        <div class=order>
+            <label>Order ID : </label>
+            <p> <%=order[i].order_id%></p>
+            <label>Order Date : </label>
+            <p> <%=order[i].date%></p>
+            <label>Item ID : </label>
+            <p> <%=order[i].item_id%></p>
+            <label>Employee ID : </label>
+            <p> <%=order[i].employee_id%></p>
+            <label>Customer ID : </label>
+            <p> <%=order[i].customer_id%></p>
+            <label>Tax ID : </label>
+            <p> <%=order[i].tax_id%></p>
+        </div>
       <input type="submit" value="create" />
     </form>
-    <center><a href="/">Back to List</a></center>
+    <%}%>
+    <center><a href="/menu">Back to Menu</a></center>
 </body>
 </html>
