@@ -60,8 +60,16 @@
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
          </div>
-         <a href="/updatemenu/<%=Item[0].item_id%>">Edit</a>
-         <center><button type="submit" class="custom-button">Buy</button></center>
+         <!--<a href="/updatemenu/<%=Item[0].item_id%>">Edit</a>-->
+         <center>
+            <a href="/updatemenu/<%=Item[0].item_id%>" class="custom-link">
+                <button type="button" class="custom-button">Edit</button>
+            </a>
+            <br>
+            <a href="/deletemenu/<%=Item[0].item_id%>" class="custom-link">
+                <button type="button" class="custom-button">Delete</button>
+            </a>
+        </center>
         </div>
     </div>
     <div class="card" style="width: 18rem;">
@@ -84,7 +92,14 @@
                
             </div>
             <a href="/updatemenu/<%=Item[1].item_id%>">Edit</a>
-            <center><button type="submit" class="custom-button">Buy</button></center>
+            <center> <a href="/updatemenu/<%=Item[0].item_id%>" class="custom-link">
+                <button type="button" class="custom-button">Edit</button>
+            </a>
+            <br>
+            <a href="/deletemenu/<%=Item[0].item_id%>" class="custom-link">
+                <button type="button" class="custom-button">Delete</button>
+            </a>
+            </center>
         </div>
     </div>
 <div class="card" style="width: 18rem;">
