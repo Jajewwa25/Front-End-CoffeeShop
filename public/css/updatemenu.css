@@ -4,3 +4,44 @@ body{
   font-family: "Anuphan", sans-serif;
   font-style: normal;
 }
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the form */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #222;
+  border-radius: 5px;
+}
+
+/* Style for input fields */
+input[type="text"],
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #222;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Style for the submit button */
+input[type="submit"] {
+  background-color: #fed330;
+  color: white;
+  cursor: pointer;
+}
+
+/* Style for the "Back to List" link */
+a {
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  text-decoration: none;
+  color: #fed330;
+}

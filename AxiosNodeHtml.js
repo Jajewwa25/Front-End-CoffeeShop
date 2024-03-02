@@ -146,7 +146,7 @@ app.get("/employee", async(req, res) => {
 app.get("/employee/:id", async(req, res) => {
   try {
     const response = await axios.get(base_url + "/employee/" + req.params.id)
-    res.render("oneemployee", {employee:response.data});
+    res.render("employee", {employee:response.data});
   } catch (err) {
     res.status(500).send("error");
     res.redirect("/");
@@ -179,6 +179,37 @@ app.get("/deleteemployee/:id", async (req, res) => {
   try {
     await axios.delete(base_url + "/employee/" + req.params.id);
     res.redirect("/employee");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.get("/updatemenu/:id", async (req, res) => {
+  try {
+    const response = await axios.get(base_url + "/Item/" + req.params.id);
+    res.render("updatemenu", { Item: response.data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.post("/updatemenu/:id", async (req, res) => {
+  try {
+    const data = { itemname: req.body.itemname, price: req.body.price };
+    await axios.put(base_url + "/Item/" + req.params.id, data);
+    res.redirect("/Item/" + req.params.id);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.get("/deletemenu/:id", async (req, res) => {
+  try {
+    await axios.delete(base_url + "/Item/" + req.params.id);
+    res.redirect("/Item");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");

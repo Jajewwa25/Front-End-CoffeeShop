@@ -8,15 +8,14 @@
 <body>
     <h1>Update Menu</h1>
     <form action="/updatemenu/<%=Item.item_id%>" method="post">
-      <input type="text" name="username" value="<%= customer.username%>" />
+      <input type="text" name="id" value="<%= Item.item_id%>" />
       <br />
-      <input type="text" name="tel"value="<%= customer.tel%>" />
+      <input type="text" name="itemname"value="<%= Item.itemname%>" />
       <br />
-      <input type="text" name="email" value="<%= customer.email%>" />
+      <input type="text" name="price" value="<%= Item.price%>" />
       <br>
-      <input type="date" name="date" value="<%= customer.date%>" />
       <input type="submit" value="Update" />
     </form>
-    <a href="/customer">Back to List</a>
+    <a href="/menu">Back to Menu</a>
 </body>
 </html>
