@@ -10,16 +10,20 @@
 <body>
     <h1>Update Menu</h1>
     <form action="/updatemenu/<%=Item.item_id%>" method="post">
-      <input type="text" name="id" value="<%= Item.item_id%>" />
+      <label>ID Item:
+      <input type="text" name="id" value="<%= Item.item_id%>" /></label>
       <br />
-      <input type="text" name="itemname"value="<%= Item.itemname%>" />
+      <label>Name Item :
+      <input type="text" name="itemname"value="<%= Item.itemname%>" /></label>
       <br />
-      <input type="text" name="price" value="<%= Item.price%>" />
+      <label>Price :
+      <input type="text" name="price" value="<%= Item.price%>" /></label>
       <br>
       <input type="submit" value="Update" />
     </form>
     <br>
-    <a href="/menu1">Back to Menu</a>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <center><a href="/menu1">Back to Menu</a></center>
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    -->
 </body>
 </html>
