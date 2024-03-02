@@ -23,13 +23,39 @@
             <center><h3>Drink</h3></center>
         </div>
     <br>
+    <!--<div class="container">
+        <% for (let i = 0; i < Item.length; i++) { %>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="uploaded_img/cof1.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><h5><%= Item[i].itemname %></h5>
+              <div class="flex">
+                <div class="price"><%= Item[i].price %></div><br>
+                    <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
+                <br>          
+             </div>
+             <center><button type="submit" class="custom-button">Buy</button></center>
+            </div>
+            <% } %>  
+        </div>-->
+
 <div class="container">
+    
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof1.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Latte</h5>
+          <h5 class="card-title">
+            <h5>
+                <% if (Item && Item[0] && Item[0].itemname) { %>
+                    <%= Item[0].itemname %>
+                <% } %>
+            </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>45<span></div><br>
+            <div class="price">
+                <% if (Item && Item[0] && Item[0].price) { %>
+                    <%= Item[0].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
                
@@ -40,9 +66,18 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof2.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Americano</h5>
+          <h5 class="card-title">
+            <h5>
+                <% if (Item && Item[1] && Item[1].itemname) { %>
+                    <%= Item[1].itemname %>
+                <% } %>
+            </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>50<span></div><br>
+            <div class="price">
+                <% if (Item && Item[1] && Item[1].price) { %>
+                    <%= Item[1].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
                
@@ -50,13 +85,19 @@
             <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
-
-    <div class="card" style="width: 18rem;">
+<div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof4.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Roast Cocoa Champurrado </h5>
+          <h5 class="card-title">
+            <% if (Item && Item[2] && Item[2].itemname) { %>
+                <%= Item[2].itemname %>
+            <% } %>
           <div class="flex">
-            <div class="price"><span>฿</span>45<span></div><br>
+            <div class="price">
+                <% if (Item && Item[2] && Item[2].price) { %>
+                    <%= Item[2].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
 
             <br>
@@ -64,15 +105,27 @@
          <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
+  
 </div>
+
 <br><br>
+
 <div class="container">
+  
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof5.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Espresso</h5>
+          <h5 class="card-title">
+                <% if (Item && Item[3] && Item[3].itemname) { %>
+                    <%= Item[3].itemname %>
+                <% } %>
+            </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>60<span></div><br>
+            <div class="price">
+                <% if (Item && Item[3] && Item[3].price) { %>
+                    <%= Item[3].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
         
@@ -83,9 +136,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof3.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Strawberry Smoothie</h5>
+          <h5 class="card-title">
+                <% if (Item && Item[4] && Item[4].itemname) { %>
+                    <%= Item[4].itemname %>
+                <% } %>
+            </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>75<span></div><br>
+            <div class="price">
+                <% if (Item && Item[4] && Item[4].price) { %>
+                    <%= Item[4].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
               
@@ -96,9 +157,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/cof6.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Orange Juice</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[5] && Item[5].itemname) { %>
+                <%= Item[5].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>45<span></div><br>
+            <div class="price">
+                <% if (Item && Item[5] && Item[5].price) { %>
+                    <%= Item[5].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
               
@@ -106,6 +175,7 @@
          <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
+  
 </div>
 <!--dessert-->
 <br><br>
@@ -114,12 +184,21 @@
         </div>
     <br>
 <div class="container">
+ 
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f1.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Chocomallow Cookie</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[6] && Item[6].itemname) { %>
+                <%= Item[6].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>60<span></div><br>
+            <div class="price">
+                <% if (Item && Item[6] && Item[6].price) { %>
+                    <%= Item[6].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
          </div>
@@ -129,9 +208,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f2.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Hazelnut Burnt Butter</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[7] && Item[7].itemname) { %>
+                <%= Item[7].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>75<span></div><br>
+            <div class="price">
+                <% if (Item && Item[7] && Item[7].price) { %>
+                    <%= Item[7].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
          </div>
@@ -141,9 +228,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f3.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Sourdough Maritozzi</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[8] && Item[8].itemname) { %>
+                <%= Item[8].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>45<span></div><br>
+            <div class="price">
+                <% if (Item && Item[8] && Item[8].price) { %>
+                    <%= Item[8].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
                
@@ -151,6 +246,7 @@
          <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
+    
 </div>
 <!-- dish -->
 <br><br>
@@ -159,12 +255,21 @@
         </div>
     <br>
 <div class="container">
+    
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f4.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Bacon Burger</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[9] && Item[9].itemname) { %>
+                <%= Item[9].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>60<span></div><br>
+            <div class="price">
+                <% if (Item && Item[9] && Item[9].price) { %>
+                    <%= Item[9].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
          </div>
@@ -174,9 +279,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f5.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Breakfast Set</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[10] && Item[10].itemname) { %>
+                <%= Item[10].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>75<span></div><br>
+            <div class="price">
+                <% if (Item && Item[10] && Item[10].price) { %>
+                    <%= Item[10].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
          </div>
@@ -186,9 +299,17 @@
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="uploaded_img/f6.png" alt="Card image cap">
         <div class="card-body">
-          <h5 class="card-title">Taco</h5>
+          <h5 class="card-title">
+            <% if (Item && Item[11] && Item[11].itemname) { %>
+                <%= Item[11].itemname %>
+            <% } %>
+        </h5>
           <div class="flex">
-            <div class="price"><span>฿</span>45<span></div><br>
+            <div class="price">
+                <% if (Item && Item[11] && Item[11].price) { %>
+                    <%= Item[11].price %>
+                <% } %>
+            </div><br>
                 <input type="number" name="qty" class="qty" min="1" max="99" value="1" onkeypress="if(this.value.length == 2) return false;"><br>
             <br>
                
@@ -196,7 +317,9 @@
          <center><button type="submit" class="custom-button">Buy</button></center>
         </div>
     </div>
+ 
 </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
