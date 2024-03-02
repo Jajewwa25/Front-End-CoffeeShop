@@ -192,12 +192,13 @@ app.post("/updatemenu/:id", async (req, res) => {
 app.get("/deletemenu/:id", async (req, res) => {
   try {
     await axios.delete(base_url + "/Item/" + req.params.id);
-    res.redirect("/Item");
+    res.redirect("/menu1");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
   }
 });
+
 
 app.get("/cart",(req, res) => {
   try {
@@ -220,6 +221,16 @@ app.get("/cart",(req, res) => {
     res.redirect("/");
   }
 });*/
+
+app.get("/delete/:id", async (req, res) => {
+  try{
+      await axios.delete(base_url + '/Item/'+ req.params.id);
+      res.redirect("/menu1");
+  } catch (err){
+      console.error(err);
+      res.status(500).send('Error');
+  }
+});
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
