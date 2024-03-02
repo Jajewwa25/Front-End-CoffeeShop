@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/customer.css" />
+    <title>Customer's Information</title>
+  </head>
+  <body>
+    <h1>Customer's Information</h1>
+    <div class=username>
+        <label for="username">Username : </label>
+        <p> <%=customer.username%></p>
+        <label for="tel">Telephone : </label>
+        <p> <%=customer.tel%></p>
+        <label for="email">Email : </label>
+        <p> <%=customer.email%></p>
+    </div>
+    <a href="/updatecustomer/<%= customer.customer_id%>">Edit</a>
+    <br><br>
+        <center><a href="/customer">Back to List</a></center>
+      </body>
+    </html>

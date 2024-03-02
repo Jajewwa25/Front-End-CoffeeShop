@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Customer</title>
+  </head>
+  <body>
+    <h1>Update Customer</h1>
+    <form action="/updatecustomer/<%=customer.customer_id%>" method="post">
+      <input type="text" name="username" value="<%= customer.username%>" />
+      <br />
+      <input type="text" name="tel"value="<%= customer.tel%>" />
+      <br />
+      <input type="text" name="email" value="<%= customer.email%>" />
+      <br>
+      <input type="date" name="date" value="<%= customer.date%>" />
+      <input type="submit" value="Update" />
+    </form>
+    <a href="/customer">Back to List</a>
+  </body>
+</html>
