@@ -1,99 +1,79 @@
-/* Reset CSS */
 @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap');
 
+
+/* Reset CSS */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Global Styles */
+/* Body style */
 body {
     font-family: "Anuphan", sans-serif;
     font-style: normal;
     background-color: #f8f8f8;
-    color: #333;
+    color: #000000;
     margin: 0;
     padding: 0;
-    font-weight: 300;
 }
-h1{
+
+a{
     font-family: "Anuphan", sans-serif;
     font-style: normal;
+    color: #000000;
 }
 
+/* Header style */
 header {
     background-color: #fed330;
-    color: black;
-    padding: 20px;
+    color: #000000;
     text-align: center;
-  }
-  
-  nav ul {
-    list-style: none;
-  }
-  
-  nav ul li {
-    display: inline;
-    margin-right: 20px;
-  }
-  
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
+    padding: 20px;
 }
 
+/* Main section style */
 main {
     max-width: 800px;
-    margin: 20px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-h2 {
-    margin-bottom: 20px;
-}
-
+/* Shopping cart item style */
 #shopping-cart {
-    display: flex;
-    flex-wrap: wrap;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
 #shopping-cart > div {
-    width: calc(50% - 10px);
-    margin-bottom: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-}
-
-#shopping-cart > div img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
 }
 
 .item-price {
-    display: block;
-    margin-bottom: 10px;
+    font-weight: bold;
 }
 
+/* Cart total style */
 .cart-total {
-    margin-top: 20px;
     text-align: right;
+    margin-bottom: 20px;
 }
 
+/* Checkout button style */
 .checkout-btn {
-    display: block;
-    margin-top: 20px;
+    background-color: #fed330;
     padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .checkout-btn:hover {
-    background-color: #555;
+    background-color: #ffffff;
 }
