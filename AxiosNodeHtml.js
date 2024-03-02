@@ -56,6 +56,16 @@ app.get("/about",(req, res) => {
   }
 });
 
+app.get("/menu",(req, res) => {
+  try {
+    res.render("menu");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
 app.get("/customer", async(req, res) => {
   try {
     const response = await axios.get(base_url + "/customer")
