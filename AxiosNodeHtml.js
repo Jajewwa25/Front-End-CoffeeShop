@@ -168,7 +168,7 @@ app.get("/employee/:id", async(req, res) => {
 });
 
 
-app.get("/updatemenu", async (req, res) => {
+app.get("/updatemenu/:id", async (req, res) => { //ใครเอาออก :id
   try {
     const response = await axios.get(base_url + "/Item/" + req.params.id);
     res.render("updatemenu", { Item: response.data });
@@ -182,7 +182,7 @@ app.post("/updatemenu/:id", async (req, res) => {
   try {
     const data = { itemname: req.body.itemname, price: req.body.price };
     await axios.put(base_url + "/Item/" + req.params.id, data);
-    res.redirect("/Item/" + req.params.id);
+    res.redirect("/menu1");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
