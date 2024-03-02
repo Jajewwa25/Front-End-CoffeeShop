@@ -79,6 +79,18 @@ app.get("/menu",async (req, res) => {
   }
 });
 
+app.get("/menu1",async (req, res) => {
+  try {
+    const response = await axios.get(base_url + "/menu1")
+    console.log(response.data);
+    res.render("menu1", {Item:response.data});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
 app.get("/customer", async(req, res) => {
   try {
     const response = await axios.get(base_url + "/customer")
