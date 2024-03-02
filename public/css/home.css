@@ -3,7 +3,7 @@
 body{
     font-family: "Anuphan", sans-serif;
     font-style: normal;
-    background-image: url('../uploaded_img/b51png.png'); /* เปลี่ยนเป็น URL ของไฟล์รูปภาพที่คุณต้องการใช้เป็นพื้นหลัง */
+    background-image: url('../uploaded_img/b.png'); /* เปลี่ยนเป็น URL ของไฟล์รูปภาพที่คุณต้องการใช้เป็นพื้นหลัง */
     background-size: cover; /* ปรับขนาดของรูปภาพให้เต็มพื้นที่ของหน้าจอ */
     background-repeat: no-repeat; /* ป้องกันการทับซ้ำของรูปภาพ */
     background-position: center; /* จัดตำแหน่งของรูปภาพให้อยู่ตรงกลางของหน้าจอ */
@@ -18,7 +18,6 @@ h6{
     color: white;
     font-size: 14px;
 }
-
 
 .container {
     width: 60%;
