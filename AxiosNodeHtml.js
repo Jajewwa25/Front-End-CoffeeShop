@@ -167,6 +167,37 @@ app.get("/employee/:id", async(req, res) => {
   }
 });
 
+app.get("/updateemployee/:id", async (req, res) => { 
+  try {
+    const response = await axios.get(base_url + "/Employee/" + req.params.id);
+    res.render("updateemployee", { Employee: response.data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.post("/updateemployee/:id", async (req, res) => {
+  try {
+    const data = { username: req.body.username, position: req.body.position};
+    await axios.put(base_url + "/Employee/" + req.params.id, data);
+    res.redirect("/about");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+app.get("/delete/:id", async (req, res) => {
+  try{
+      await axios.delete(base_url + '/Employee/'+ req.params.id);
+      res.redirect("/about");
+  } catch (err){
+      console.error(err);
+      res.status(500).send('Error');
+  }
+});
+
 
 app.get("/updatemenu/:id", async (req, res) => { //ใครเอาออก :id
   try {
@@ -189,16 +220,15 @@ app.post("/updatemenu/:id", async (req, res) => {
   }
 });
 
-app.get("/deletemenu/:id", async (req, res) => {
-  try {
-    await axios.delete(base_url + "/Item/" + req.params.id);
-    res.redirect("/menu1");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error");
+app.get("/delete/:id", async (req, res) => {
+  try{
+      await axios.delete(base_url + '/Item/'+ req.params.id);
+      res.redirect("/menu1");
+  } catch (err){
+      console.error(err);
+      res.status(500).send('Error');
   }
 });
-
 
 app.get("/cart",(req, res) => {
   try {
@@ -221,16 +251,6 @@ app.get("/cart",(req, res) => {
     res.redirect("/");
   }
 });*/
-
-app.get("/delete/:id", async (req, res) => {
-  try{
-      await axios.delete(base_url + '/Item/'+ req.params.id);
-      res.redirect("/menu1");
-  } catch (err){
-      console.error(err);
-      res.status(500).send('Error');
-  }
-});
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
