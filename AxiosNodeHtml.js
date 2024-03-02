@@ -67,9 +67,11 @@ app.get("/about",(req, res) => {
   }
 });
 
-app.get("/menu",(req, res) => {
+app.get("/menu",async (req, res) => {
   try {
-    res.render("menu");
+    const response = await axios.get(base_url + "/menu")
+    console.log(response.data);
+    res.render("menu", {Item:response.data});
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
