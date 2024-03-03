@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 const path = require("path");
+const multer = require("multer");
 var bodyParser = require("body-parser");
 const { clearConfigCache } = require("prettier");
 
@@ -13,6 +14,16 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("views", path.join(__dirname, "/public/views"));
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploaded_img");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage: storage });
 
 app.use(express.static(__dirname + "/public"));
 
@@ -290,14 +301,46 @@ app.get("/addmenu", (req, res) => {
   }
 });
 
-app.post("/addmenu/:id", async (req, res) => {
+app.post("/addmenu/:id",upload.single("imageFile"), async (req, res) => {
   try {
     const data = {
       itemname: req.body.itemname,
       price: req.body.price
     };
+    if (req.file) data.imageFile = req.file.filename;
     await axios.post(base_url + '/item' , data);
             return res.redirect("/updatemenu");
+    //await axios.put(base_url + "/item/" + req.params.id, data);
+   // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+// addemployee
+app.get("/addemployee", (req, res) => {
+  try {
+    res.render("addemployee");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.post("/addemployee/:id", async (req, res) => {
+  try {
+    const data = {
+      username: req.body.username,
+      password: req.body.password,
+      age: req.body.age,
+      position: req.body.position,
+      address: req.body.address,
+      tel: req.body.tel,
+      email: req.body.email
+    };
+    await axios.post(base_url + '/employee' , data);
+            return res.redirect("/updateemployee");
     //await axios.put(base_url + "/item/" + req.params.id, data);
    // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
   } catch (err) {

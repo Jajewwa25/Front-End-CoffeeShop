@@ -6,7 +6,7 @@ body{
     font-size: medium;
 }
 .card-body {
-    max-width: 400px;
+    max-width: 560px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #fed330;
