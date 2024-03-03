@@ -36,3 +36,18 @@ img {
     width: 700px; /* กำหนดความกว้าง */
     margin: 0 auto; /* จัดกล่องให้อยู่ตรงกลาง */
 }
+
+a {
+    display: inline-block;
+    margin: 10px;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.2s;
+  }
+  
+  a:hover {
+    border-bottom-color: #fed330;
+  }

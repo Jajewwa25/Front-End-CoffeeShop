@@ -4,6 +4,30 @@ body{
     font-family: "Anuphan", sans-serif;
     font-style: normal;
 }
+.head {
+  display: flex;
+  justify-content: flex-end; /* จัดเรียงให้อยู่ทางขวา */
+  align-items: center; /* จัดให้อยู่กึ่งกลางตามแนวดิ่ง */
+  padding: 0px; /* ขอบเขตของพื้นที่หัวของเว็บ */
+}
+
+.spacer {
+  flex-grow: 1; /* ให้พื้นที่ว่างยืดขยายเต็มพื้นที่ที่เหลือ */
+}
+
+.btn {
+  padding: 10px 20px; /* ขนาดของปุ่ม */
+  background-color: #fed330; /* สีพื้นหลังของปุ่ม */
+  color: black; /* สีข้อความ */
+  border: none; /* ไม่มีเส้นขอบ */
+  border-radius: 5px; /* ขอบโค้ง */
+  text-decoration: none; /* ไม่มีการเขี้ยวเส้นใต้ข้อความ */
+}
+
+.btn:hover {
+  background-color: white; /* เมื่อเมาส์ไฮไลต์ที่ปุ่ม */
+}
+
 
 h1 {
     text-align: center;

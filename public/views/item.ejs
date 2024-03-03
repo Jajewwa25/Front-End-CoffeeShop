@@ -8,6 +8,10 @@
   </head>
   <body>
     <br><br>
+    <div class="head">
+      <div class="spacer"></div> <!-- เพิ่มพื้นที่ว่าง -->
+      <a href="/addmenu" class="btn">➕ Add Menu</a>
+    </div>
     <h1>Item's Information</h1>
     <% for(var i = 0; i < Item.length; i++){%>
     <form method="post" action="/create">
@@ -19,7 +23,7 @@
     </div>
     <br />
     <a href="/updatemenu/<%= Item[i].item_id%>">Update</a>
-    <a href="/deletemenu/<%= Item[i].item_id%>">Delete</a>1
+    <a href="/deletemenu/<%= Item[i].item_id%>">Delete</a>
     </form>
     <br><br>
     <%}%>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu</title>
+    <link rel="stylesheet" href="../css/addmenu.css" />
+</head>
+<body>
+    <br><br><br>
+    <div class="card-body">
+        <h5 class="card-title">Add Menu</h5>
+        <br>
+        <div class="form-group">
+            <label for="price">Item Name</label>
+            <input type="text" name="director" placeholder="item name"/>
+            <br><br>
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="price" pattern="[0-9]{1,7}" required>
+            <br><br>
+            <label for="price">Image</label>
+            <input type="file" name="imageFile" />
+            <button type="submit" class="btn btn-primary">OK</button>
+        </div>
+    </div>
+    <br>
+    <center><a href="/item">Back to List</a></center>
+</body>
+</html>
