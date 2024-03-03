@@ -9,13 +9,15 @@
 </head>
 <body>
     <h1>Update Menu</h1>
-    <form action="/updatemenu/<%=Item.item_id%>" method="post">
+    <form action="/updatemenu" method="post" enctype="multipart/form-data">
       <label>Name Item :
       <input type="text" name="itemname"value="<%= Item.itemname%>" /></label>
       <br />
       <label>Price :
       <input type="text" name="price" value="<%= Item.price%>" /></label>
       <br>
+      <label for="price">Image</label>
+      <input type="file" name="imageFile" />
       <input type="submit" value="Update" />
     </form>
     <br>
