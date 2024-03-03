@@ -301,17 +301,15 @@ app.get("/addmenu", (req, res) => {
   }
 });
 
-app.post("/addmenu/:id",upload.single("imageFile"), async (req, res) => {
+app.post("/addmenu/:id", upload.single("imageFile"), async (req, res) => {
   try {
     const data = {
       itemname: req.body.itemname,
       price: req.body.price
     };
-    if (req.file) data.imageFile = req.file.filename;
-    await axios.post(base_url + '/item' , data);
-            return res.redirect("/updatemenu");
-    //await axios.put(base_url + "/item/" + req.params.id, data);
-   // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
+    if (req.file) data.imageFile = req.file.filename; // เพิ่มชื่อไฟล์ภาพเข้าไปในข้อมูล
+    await axios.post(base_url + '/item', data);
+    return res.redirect("/updatemenu");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
@@ -328,7 +326,7 @@ app.get("/addemployee", (req, res) => {
   }
 });
 
-app.post("/addemployee/:id", async (req, res) => {
+app.post("/addemployee/:id", upload.single("imageFile"), async (req, res) => {
   try {
     const data = {
       username: req.body.username,
@@ -339,10 +337,9 @@ app.post("/addemployee/:id", async (req, res) => {
       tel: req.body.tel,
       email: req.body.email
     };
-    await axios.post(base_url + '/employee' , data);
-            return res.redirect("/updateemployee");
-    //await axios.put(base_url + "/item/" + req.params.id, data);
-   // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
+    if (req.file) data.imageFile = req.file.filename; // เพิ่มชื่อไฟล์ภาพเข้าไปในข้อมูล
+    await axios.post(base_url + '/employee', data);
+    return res.redirect("/updateemployee");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
