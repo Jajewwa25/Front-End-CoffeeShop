@@ -14,14 +14,18 @@
     <div class="card-body">
         <h5 class="card-title">Add Menu</h5>
         <div class="form-group" enctype="multipart/form-data">
-            <label for="price">Item Name</label>
-            <input type="text" name="director" placeholder="item name"/>
-            <br><br>
-            <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" name="price" placeholder="price" pattern="[0-9]{1,7}" required>
-            <br><br>
-            <label for="price">Image</label>
-            <input type="file" name="imageFile" />
+            <form action="/addmenu" method="post" enctype="multipart/form-data">
+                <label for="price">Item Name</label>
+                <input type="text" name="itemname" placeholder="item name" />
+                <br><br>
+                <label for="price">Price</label>
+                <input type="text" class="form-control" name="price" placeholder="price" pattern="[0-9]{1,7}" required >
+                <br><br>
+                <label for="price">Image</label>
+                <input type="file" name="imageFile" />
+                <input type="submit" value="OK">
+            </form>
+
             <center>
                 <a href="/item" class="custom-link">
                     <button type="button" class="custom-button">OK</button>

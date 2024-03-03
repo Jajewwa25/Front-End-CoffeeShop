@@ -279,8 +279,6 @@ app.get("/deletemenu/:id", async (req, res) => {
   }
 });
 
-
-
 app.get("/delete/:id", async (req, res) => {
   try{
       await axios.delete(base_url + '/Item/'+ req.params.id);
@@ -301,20 +299,37 @@ app.get("/addmenu", (req, res) => {
   }
 });
 
-app.post("/addmenu/:id", upload.single("imageFile"), async (req, res) => {
+app.post("/addmenu", upload.single("imageFile"), async (req, res) => {
   try {
     const data = {
       itemname: req.body.itemname,
       price: req.body.price
     };
-    if (req.file) data.imageFile = req.file.filename; // เพิ่มชื่อไฟล์ภาพเข้าไปในข้อมูล
-    await axios.post(base_url + '/item', data);
-    return res.redirect("/updatemenu");
+    if (req.file) data.img = req.file.filename; // Add the image file name to the data
+    await axios.post(base_url + '/Items', data);
+    return res.redirect("/menu");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
   }
 });
+
+// app.post("/addmenu/:id", upload.single("imageFile"), async (req, res) => {
+//   try {
+//     const data = {
+//       itemname: req.body.itemname,
+//       price: req.body.price
+//     };
+//     if (req.file) data.imageFile = req.file.filename; // เพิ่มชื่อไฟล์ภาพเข้าไปในข้อมูล
+//     await axios.post(base_url + '/item', data);
+//     return res.redirect("/updatemenu");
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("Error");
+//   }
+// });
+
+
 // addemployee
 app.get("/addemployee", (req, res) => {
   try {
