@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/customer.css" />
+    <title>Menu's Information</title>
+  </head>
+  <body>
+    <h1>Menu's Information</h1>
+    <div class="username">
+      <% for(var i = 0; i < Item.length; i++) { %>
+        <label for="itemname">Item Name: </label>
+        <p><%= Item[i].itemname %></p>
+        <label for="price">Price : </label>
+        <p><%= Item[i].price %></p>
+        <a href="/updatemenu/<%= Item[i].item_id %>">Edit</a>
+        <br><br>
+      <% } %>
+    </div>
+    <center><a href="/item">Back to List</a></center>
+  </body>
+</html>

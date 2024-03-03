@@ -57,9 +57,11 @@ app.get("/Register",(req, res) => {
   }
 });
 
-app.get("/about",(req, res) => {
+app.get("/about",async (req, res) => {
   try {
-    res.render("about");
+    const response = await axios.get(base_url + "/about")
+    console.log(response.data);
+    res.render("about", {Employee:response.data});
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
@@ -122,6 +124,7 @@ app.get("/updatecustomer/:id", async (req, res) => {
   }
 });
 
+
 app.post("/updatecustomer/:id", async (req, res) => {
   try {
     const data = { username: req.body.username, tel: req.body.tel,
@@ -151,7 +154,7 @@ app.get("/employee", async(req, res) => {
     const response = await axios.get(base_url + "/employee")
     console.log(response.data);
     res.render("employee", {Employee:response.data});
-  } catch (err) {
+  } catch (err) { 
     res.status(500).send("error");
     res.redirect("/");
   }
@@ -160,7 +163,7 @@ app.get("/employee", async(req, res) => {
 app.get("/employee/:id", async(req, res) => {
   try {
     const response = await axios.get(base_url + "/employee/" + req.params.id)
-    res.render("employee", {Employee:response.data});
+    res.render("oneemployee", {Employee:response.data});
   } catch (err) {
     res.status(500).send("error");
     res.redirect("/");
@@ -170,7 +173,7 @@ app.get("/employee/:id", async(req, res) => {
 app.get("/updateemployee/:id", async (req, res) => { 
   try {
     const response = await axios.get(base_url + "/employee/" + req.params.id);
-    res.render("employee", { Employee: response.data });
+    res.render("updateemployee", { Employee: response.data });
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
@@ -179,29 +182,57 @@ app.get("/updateemployee/:id", async (req, res) => {
 
 app.post("/updateemployee/:id", async (req, res) => {
   try {
-    const data = { username: req.body.username, position: req.body.position};
-    await axios.put(base_url + "/employee/" + req.params.id, data);
-    res.redirect("/about");
+    const data = { username: req.body.username,
+      password: req.body.password,
+      age: req.body.age,
+      position: req.body.position,
+      address: req.body.address,
+      tel: req.body.tel,
+      email: req.body.email};
+    await axios.put(base_url + "/Employee/" + req.params.id, data);
+    res.redirect("/employee");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
   }
 });
 
-app.get("/delete/:id", async (req, res) => {
-  try{
-      await axios.delete(base_url + '/employee/'+ req.params.id);
-      res.redirect("/about");
-  } catch (err){
-      console.error(err);
-      res.status(500).send('Error');
+app.get("/deleteemployee/:id", async (req, res) => {
+  try {
+    await axios.delete(base_url + "/Employee/" + req.params.id);
+    res.redirect("/employee");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+//
+app.get("/item", async (req, res) => {
+  try {
+    const response = await axios.get(base_url + "/item");
+    console.log(response.data);
+    res.render("item", { Item: response.data });
+  } catch (err) {
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.get("/item/:id", async(req, res) => {
+  try {
+    const response = await axios.get(base_url + "/item/" + req.params.id)
+    res.render("onemenu", {Item:response.data});
+  } catch (err) {
+    res.status(500).send("error");
+    res.redirect("/");
   }
 });
 
 
-app.get("/updatemenu/:id", async (req, res) => { //ใครเอาออก :id
+app.get("/updatemenu/:id", async (req, res) => { 
   try {
-    const response = await axios.get(base_url + "/Item/" + req.params.id);
+    const response = await axios.get(base_url + "/item/" + req.params.id);
     res.render("updatemenu", { Item: response.data });
   } catch (err) {
     console.error(err);
@@ -209,16 +240,35 @@ app.get("/updatemenu/:id", async (req, res) => { //ใครเอาออก :
   }
 });
 
+
 app.post("/updatemenu/:id", async (req, res) => {
   try {
-    const data = { itemname: req.body.itemname, price: req.body.price };
-    await axios.put(base_url + "/Item/" + req.params.id, data);
-    res.redirect("/menu1");
+    const data = {
+      itemname: req.body.itemname,
+      price: req.body.price
+    };
+    await axios.put(base_url + "/item/" + req.params.id, data);
+    res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
   }
 });
+
+
+
+
+app.get("/deletemenu/:id", async (req, res) => {
+  try {
+    await axios.delete(base_url + "/item/" + req.params.id);
+    res.redirect("/item");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+
 
 app.get("/delete/:id", async (req, res) => {
   try{
@@ -240,17 +290,7 @@ app.get("/cart",(req, res) => {
   }
 });
 
-/*app.get("/updatemenu",async (req, res) => {
-  try {
-    const response = await axios.get(base_url + "/updatemenu")
-    console.log(response.data);
-    res.render("updatemenu", {Item:response.data});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("error");
-    res.redirect("/");
-  }
-});*/
+
 
 app.listen(5500, () => {
   console.log("server started on port 5500");

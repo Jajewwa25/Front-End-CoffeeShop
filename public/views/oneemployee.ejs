@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/employee.css" />
+    <title>Employee's Information</title>
+  </head>
+  <body>
+    <h1>Employee's Information</h1>
+    <div class=username>
+        <label for="username">Username : </label>
+        <p> <%=Employee.username%></p>
+        <label for="password">Password : </label>
+        <p> <%=Employee.password%></p>
+        <label for="age">Age : </label>
+        <p> <%=Employee.age%></p>
+        <label for="position">Position : </label>
+        <p> <%=Employee.position%></p>
+        <label for="address">Address : </label>
+        <p> <%=Employee.address%></p>
+        <label for="tel">Telephone : </label>
+        <p> <%=Employee.tel%></p>
+        <label for="email">Email : </label>
+        <p> <%=Employee.email%></p>
+    </div>
+    <a href="/updateemployee/<%= Employee.employee_id%>">Edit</a>
+    <br><br>
+        <center><a href="/employee">Back to List</a></center>
+      </body>
+    </html>

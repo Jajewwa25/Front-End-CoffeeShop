@@ -40,9 +40,30 @@ h1{
     font-size: 55px;
 }
 
+.reviews {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
 
+.reviews div {
+    text-align: center;
+    width: 250px;
+    margin: 20px;
+}
+
+.reviews img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.reviews h3,
+.reviews p {
+    margin: 10px 0;
+}
 
 section.reviews div{
+    display: flex;
     text-align: center;
     max-width: 800px;
     overflow: hidden;

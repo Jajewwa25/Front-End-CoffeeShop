@@ -47,7 +47,7 @@ nav ul li a {
     color: black; /* กำหนดสีตัวอักษร */
     padding: 10px; /* กำหนดขอบของพื้นหลัง */
     text-align: center; /* จัดข้อความกึ่งกลาง */
-    max-width: 76%; /* กำหนดความกว้างสูงสุดของ .card-header */
+    max-width: 85%; /* กำหนดความกว้างสูงสุดของ .card-header */
     margin: 0 auto; /* จัดข้อความตรงกลาง */
     border-radius: 8px;
   }
