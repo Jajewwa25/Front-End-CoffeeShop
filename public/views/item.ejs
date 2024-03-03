@@ -20,6 +20,8 @@
         <p> <%=Item[i].itemname%></p>
         <label for="price">Price : </label>
         <p> <%=Item[i].price%></p>
+        <label for="price">Price : </label>
+        <img src="/uploaded_img/<%=Item[i].img%>" alt="" style="width: 300px;height: 300px;object-fit: cover;">
     </div>
     <br />
     <a href="/updatemenu/<%= Item[i].item_id%>">Update</a>
