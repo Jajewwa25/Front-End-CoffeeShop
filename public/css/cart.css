@@ -12,7 +12,7 @@
 body {
     font-family: "Anuphan", sans-serif;
     font-style: normal;
-    background-color: #f8f8f8;
+    background-color: #ffffff;
     color: #000000;
     margin: 0;
     padding: 0;
@@ -22,6 +22,7 @@ a{
     font-family: "Anuphan", sans-serif;
     font-style: normal;
     color: #000000;
+    text-decoration: none;
 }
 
 /* Header style */
@@ -72,6 +73,7 @@ main {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    
 }
 
 .checkout-btn:hover {
