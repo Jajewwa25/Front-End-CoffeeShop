@@ -69,6 +69,36 @@ app.get("/register",(req, res) => {
   }
 });
 
+app.post("/login", async (req, res) => {
+  try {
+    // ดึงข้อมูล customer จากฐานข้อมูลหรือที่เก็บข้อมูล
+    const customers = await axios.get(base_url + "/customer");
+    const { username, password } = req.body;
+
+    // เช็คว่ามี customer ที่มี username และ password ตรงกับที่รับเข้ามาหรือไม่
+    const matchedCustomer = customers.data.find(customer => customer.username === username && customer.password === password);
+
+    if (matchedCustomer) {
+      // ถ้า username คือ 'Admin' ให้ไปที่หน้า menu1
+      if (username === 'Admin') {
+        res.redirect("/menu1");
+      } else{
+        // ถ้าไม่ใช่ 'Admin' ให้ไปที่หน้า menu
+        res.redirect("/menu");
+      }
+    } else {
+      // หากไม่พบข้อมูล customer ในฐานข้อมูลหรือไม่สามารถตรวจสอบได้
+      // สามารถเพิ่มการจัดการข้อผิดพลาดเพื่อแจ้งให้ผู้ใช้รู้ว่าข้อมูลไม่ถูกต้อง
+      // หรือทำการเข้าสู่ระบบใหม่อีกครั้งได้ตามต้องการ
+      res.redirect("/login");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
+  }
+});
+
+
 app.post("/register", async (req, res) => {
   try {
     const data = {
