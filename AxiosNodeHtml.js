@@ -76,7 +76,9 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
 
     // เช็คว่ามี customer ที่มี username และ password ตรงกับที่รับเข้ามาหรือไม่
-    const matchedCustomer = customers.data.find(customer => customer.username === username && customer.password === password);
+    const matchedCustomer = customers.data.find(
+      (customer) => customer.username == username && customer.password == password
+    );
 
     if (matchedCustomer) {
       // ถ้า username คือ 'Admin' ให้ไปที่หน้า menu1
@@ -90,6 +92,7 @@ app.post("/login", async (req, res) => {
       // หากไม่พบข้อมูล customer ในฐานข้อมูลหรือไม่สามารถตรวจสอบได้
       // สามารถเพิ่มการจัดการข้อผิดพลาดเพื่อแจ้งให้ผู้ใช้รู้ว่าข้อมูลไม่ถูกต้อง
       // หรือทำการเข้าสู่ระบบใหม่อีกครั้งได้ตามต้องการ
+
       res.redirect("/login");
     }
   } catch (err) {
@@ -98,6 +101,9 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.get("/logout", (req, res) => {
+  res.redirect("/login");
+});
 
 app.post("/register", async (req, res) => {
   try {
