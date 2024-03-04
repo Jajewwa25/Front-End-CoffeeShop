@@ -58,12 +58,31 @@ app.get("/login",(req, res) => {
   }
 });
 
-app.get("/Register",(req, res) => {
+app.get("/register",(req, res) => {
   try {
     res.render("Register");
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const data = {
+      username: req.body.username,
+      password: req.body.password,
+      tel: req.body.tel,
+      email:req.body.email
+    };
+    console.log(data)
+    await axios.post(base_url + "/register", data);
+
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error in /register");
     res.redirect("/");
   }
 });
