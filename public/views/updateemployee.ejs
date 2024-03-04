@@ -9,8 +9,8 @@
   </head>
   <body>
 
-    <h1>Update Employee</h1>
-    <form action="/updateemployee/<%=Employee.employee_id%>" method="post">
+    <h1>Update </h1>
+    <form action="/updateemployee/<%=Employee.employee_id%>" method="post" enctype="multipart/form-data">
       <label>Username : 
       <input type="text" name="username" id="username" value="<%= Employee.username%>" /></label>
       <br />
