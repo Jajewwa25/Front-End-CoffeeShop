@@ -23,6 +23,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage: storage });
 
 app.use(express.static(__dirname + "/public"));
@@ -292,6 +293,7 @@ app.get("/delete/:id", async (req, res) => {
   }
 });
 // Add menu
+
 app.get("/addmenu", (req, res) => {
   try {
     res.render("addmenu");
@@ -329,19 +331,17 @@ app.get("/addemployee", (req, res) => {
   }
 });
 
-app.post("/addemployee/:id",upload.single("img"), async (req, res) => {
+app.post("/addemployee",upload.single("img"), async (req, res) => {
   try {
     const data = {
       username: req.body.username,
       password: req.body.password,
       age: req.body.age,
       position: req.body.position,
-      address: req.body.address,
-      tel: req.body.tel,
-      email: req.body.email
+      img:req.file.filename
     };
-    await axios.post(base_url + '/employee' , data);
-          res.redirect("/updateemployee");
+    await axios.post(base_url + '/Employee' , data);
+          res.redirect("/employee");
     //await axios.put(base_url + "/item/" + req.params.id, data);
    // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
   } catch (err) {

@@ -9,7 +9,7 @@
   </head>
   <body>
 
-    <h1>Update Customer</h1>
+    <h1>Update Employee</h1>
     <form action="/updateemployee/<%=Employee.employee_id%>" method="post">
       <label>Username : 
       <input type="text" name="username" id="username" value="<%= Employee.username%>" /></label>
@@ -23,15 +23,8 @@
       <label>Position : 
         <input type="text" name="position"  id="position" value="<%= Employee.position%>" /></label>
         <br>
-     <label>Address : 
-        <input type="text" name="address"  id="address" value="<%= Employee.address%>" /></label>
-        <br>
-    <label>Tel : 
-        <input type="text" name="tel"  id="tel" value="<%= Employee.tel%>" /></label>
-        <br>
-      <label>Email : 
-        <input type="text" name="email" id="email" value="<%= Employee.email%>" /></label>
-        <br />
+        <label for="price">Image</label>
+        <input type="file" name="img" />
       <center><input type="submit" value="Update" /></center>
     </form>
 
