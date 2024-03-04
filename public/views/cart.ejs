@@ -51,13 +51,15 @@
         <h2>Your Cart</h2>
 
         <div id="shopping-cart">
+            <% for (let i = 0; i < cart.length; i++) { %>
             <div id="item1">
-                <p>Product 1</p>
-                <span class="item-price">$10.00</span>
+                <p><%=cart[i].itemname%></p>
+                <span class="item-price"><%=cart[i].qty%></span>
+                <span class="item-price"><%=cart[i].price%></span>
                 <button class="checkout-btn" onclick="removeItem('item1')">Remove Item</button>
             </div>
             <br>
-    
+            <% } %>
         </div>
 
         <div class="cart-total">
@@ -66,7 +68,7 @@
         </div>
 
         <button class="checkout-btn"><a href="/menu">Back</a></button>
-        <button class="checkout-btn"><a href="/order">Pay</a></button>
+        <button class="checkout-btn"><a href="order">Pay</a></button>
     </main>
 </body>
 </html>

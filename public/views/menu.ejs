@@ -33,16 +33,20 @@
                         <div class="card">
                             <img class="card-img-top" src="../uploaded_img/<%= Item[i].img %>" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title"><%= Item[i].itemname %></h5>
-                                <p class="card-text">Price: <%= Item[i].price %></p>
+                                <form action="/cart" method="post">
+                                <h5 class="card-title" name="itemname"><%= Item[i].itemname %></h5>
+                                <p class="card-text" name="price">Price: <%= Item[i].price %></p>
+                                <input type="hidden" name="item_id" value="<%= Item[i].item_id %>">
                                 <input type="number" name="qty" class="qty form-control" min="1" max="99" value="1">
                                 <br>
                                 <div class="d-flex justify-content-center mt-2">
+                                    <button type="submit">Add To Cart</button>
                                     <a href="/cart" class="btn btn-warning mx-2">Go to cart 🛒</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </form>
                     <% } %>
                 </div>
             </div>
