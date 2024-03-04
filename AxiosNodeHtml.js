@@ -211,15 +211,13 @@ app.get("/updateemployee/:id", async (req, res) => {
   }
 });
 
-app.post("/updateemployee/:id", async (req, res) => {
+app.post("/updateemployee",upload.single("img"), async (req, res) => {
   try {
     const data = { username: req.body.username,
       password: req.body.password,
       age: req.body.age,
       position: req.body.position,
-      address: req.body.address,
-      tel: req.body.tel,
-      email: req.body.email};
+      img:req.file.filename};
     await axios.put(base_url + "/Employee/" + req.params.id, data);
     res.redirect("/employee");
   } catch (err) {
