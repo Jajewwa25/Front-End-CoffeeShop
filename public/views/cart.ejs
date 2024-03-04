@@ -11,66 +11,55 @@
         <h1>Shopping Cart</h1>
     </header>
 
-    
     <main>
 
         <script>
-            // JavaScript function to remove an item from the shopping cart
             function removeItem(itemId) {
                 var item = document.getElementById(itemId);
                 if (item) {
+                    var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('฿', ''));
+                    var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
+                    totalPrice -= itemPrice;
+                    document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
                     item.remove();
                 }
             }
-
-            function calculateTotalPrice() {
-                var items = document.querySelectorAll('.item-price');
+    
+            function calculateTotal() {
                 var totalPrice = 0;
-                items.forEach(function(item) {
-                    totalPrice += parseFloat(item.textContent.replace('$', ''));
+                var items = document.querySelectorAll('.item');
+                items.forEach(function (item) {
+                    var price = parseFloat(item.querySelector('.item-price').textContent.replace('฿', ''));
+                    totalPrice += price;
                 });
-                document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
+                document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
             }
-
-                // JavaScript function to remove an item from the shopping cart and update total price
-    function removeItem(itemId, price) {
-        var item = document.getElementById(itemId);
-        if (item) {
-            var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('$', ''));
-            var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
-            totalPrice -= itemPrice;
-            document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
-            item.remove();
-        }
-    }
-        
-            // Call the function to calculate total price when the page loads
-            window.onload = calculateTotalPrice;
+    
+            window.onload = calculateTotal;
         </script>
     
         <h2>Your Cart</h2>
 
         <div id="shopping-cart">
             <% for (let i = 0; i < cart.length; i++) { %>
-            <div id="item1">
-                <p><%=cart[i].itemname%></p>
-                <span class="item-price"><%=cart[i].qty%></span>
-                <span class="item-price"><%=cart[i].price%></span>
-                <button class="checkout-btn" onclick="removeItem('item1')">Remove Item</button>
+            <div class="item" id="item<%= i %>">
+                <p><%= cart[i].itemname %></p>
+                <span class="item-qrt"><%= cart[i].qty %></span>
+                <!-- แก้การแสดงราคาเพื่อให้แสดงเป็นราคารวมของแต่ละรายการ -->
+                <span class="item-price">฿<%= cart[i].qty * cart[i].price %></span>
+                <button class="checkout-btn" onclick="removeItem('item<%= i %>')">Remove Item</button>
             </div>
             <br>
             <% } %>
         </div>
-
         <div class="cart-total">
             <h3>Total:</h3>
             <span id="total-amount">฿0.00</span>
         </div>
         <center>
-        <button class="checkout-btn"><a href="/menu">Back</a></button>
-        <button class="checkout-btn"><a href="order">Pay</a></button>
-    </center>
+            <button class="checkout-btn"><a href="/menu">Back</a></button>
+            <button class="checkout-btn"><a href="order">Pay</a></button>
+        </center>
     </main>
 </body>
 </html>
-
