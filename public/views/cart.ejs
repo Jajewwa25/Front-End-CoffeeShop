@@ -37,7 +37,7 @@
         var item = document.getElementById(itemId);
         if (item) {
             var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('$', ''));
-            var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('$', ''));
+            var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
             totalPrice -= itemPrice;
             document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
             item.remove();
@@ -64,7 +64,7 @@
 
         <div class="cart-total">
             <h3>Total:</h3>
-            <span id="total-amount">$0.00</span>
+            <span id="total-amount">฿0.00</span>
         </div>
 
         <button class="checkout-btn"><a href="/menu">Back</a></button>
