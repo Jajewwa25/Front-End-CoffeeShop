@@ -329,7 +329,7 @@ app.get("/addemployee", (req, res) => {
   }
 });
 
-app.post("/addemployee/:id", async (req, res) => {
+app.post("/addemployee/:id",upload.single("img"), async (req, res) => {
   try {
     const data = {
       username: req.body.username,
@@ -341,7 +341,7 @@ app.post("/addemployee/:id", async (req, res) => {
       email: req.body.email
     };
     await axios.post(base_url + '/employee' , data);
-            return res.redirect("/updateemployee");
+          res.redirect("/updateemployee");
     //await axios.put(base_url + "/item/" + req.params.id, data);
    // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
   } catch (err) {

@@ -24,12 +24,7 @@
         <p> <%=Employee[i].age%></p>
         <label for="position">Position : </label>
         <p> <%=Employee[i].position%></p>
-        <label for="address">Address : </label>
-        <p> <%=Employee[i].address%></p>
-        <label for="tel">Telephone : </label>
-        <p> <%=Employee[i].tel%></p>
-        <label for="email">Email : </label>
-        <p> <%=Employee[i].email%></p>
+        <img src="/uploaded_img/<%=Item[i].img%>" alt="" style="width: 300px;height: 300px;object-fit: cover;">
     </div>
     <br />
     <a href="/updateemployee/<%= Employee[i].employee_id%>">Update</a>

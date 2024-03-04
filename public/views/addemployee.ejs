@@ -14,6 +14,7 @@
     <div class="card-body">
         <h5 class="card-title">Add Employee</h5>
         <div class="form-group" enctype="multipart/form-data">
+        <form action="/addemployee" method="post" enctype="multipart/form-data">
             <label for="price">username</label>
             <input type="text" name="usermane" placeholder="username"/>
             <br><br>
@@ -26,18 +27,10 @@
             <label for="price">Position</label>
             <input type="text" name="position" placeholder="position"/>
             <br><br>
-            <label for="price">Adress</label>
-            <input type="text" name="address" placeholder="address"/>
-            <br><br>
-            <label for="price">Tel</label>
-            <input type="text" name="tel" placeholder="tel"/>
-            <br><br>
-            <label for="price">Email</label>
-            <input type="text" name="email" placeholder="email"/>
-            <br><br>
             <label for="price">Image</label>
             <input type="file" name="imageFile" />
-            <button type="submit" class="btn btn-primary">OK</button>
+            <input type="submit" value="OK">
+        </form>
         </div>
     </div>
     <br>
