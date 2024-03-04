@@ -55,6 +55,14 @@ nav ul li a {
   .card-header h3 {
     margin: 0; /* ลบระยะห่างขอบของ h3 */
   }
+
+  .btn-add-to-cart {
+    background-color: #fed330;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
   
 
 
