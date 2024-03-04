@@ -368,12 +368,34 @@ app.post("/addemployee",upload.single("img"), async (req, res) => {
 });
 
 
-app.get("/cart",(req, res) => {
+app.get("/cart",async(req, res) => {
   try {
-    res.render("cart");
+    const response = await axios.get(
+      base_url + "/cart"
+    );
+    console.log(response.data);
+    res.render("cart",{cart:response.data});
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.post("/cart", async (req, res) => {
+  try {
+    const data = {
+      item_id:req.body.item_id,
+      customer_id:1,
+      qty:req.body.qty
+    };
+    console.log(data)
+    const response = await axios.post(base_url + "/cart", data);
+    console.log(response)
+    res.redirect("/cart");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error in /cart");
     res.redirect("/");
   }
 });
