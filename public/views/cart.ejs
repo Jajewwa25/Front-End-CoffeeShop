@@ -15,48 +15,57 @@
     <main>
 
         <script>
-            // JavaScript function to remove an item from the shopping cart
-            function removeItem(itemId) {
-                var item = document.getElementById(itemId);
-                if (item) {
-                    item.remove();
+                function removeItem(itemId, price) {
+                    var item = document.getElementById(itemId);
+                    if (item) {
+                        var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('฿', ''));
+                        var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
+                        totalPrice -= itemPrice;
+                        document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
+                        item.remove();
+                    }
                 }
-            }
-
-            function calculateTotalPrice() {
-                var items = document.querySelectorAll('.item-price');
-                var totalPrice = 0;
-                items.forEach(function(item) {
-                    totalPrice += parseFloat(item.textContent.replace('$', ''));
-                });
-                document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
-            }
-
+            
+                // JavaScript function to calculate total price of items in the cart
+                function calculateTotal() {
+                    var totalPrice = 0;
+                    var itemPrices = document.querySelectorAll('.item-price');
+                    itemPrices.forEach(function(item) {
+                        var price = parseFloat(item.textContent.replace('฿', ''));
+                        totalPrice += price;
+                    });
+                    document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
+                }
+            
+                // Call the calculateTotal function when the page loads
+                window.onload = calculateTotal;
+            
                 // JavaScript function to remove an item from the shopping cart and update total price
-    function removeItem(itemId, price) {
-        var item = document.getElementById(itemId);
-        if (item) {
-            var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('$', ''));
-            var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
-            totalPrice -= itemPrice;
-            document.getElementById('total-amount').textContent = '$' + totalPrice.toFixed(2);
-            item.remove();
-        }
-    }
+                function removeItem(itemId, price) {
+                    var item = document.getElementById(itemId);
+                    if (item) {
+                        var itemPrice = parseFloat(item.querySelector('.item-price').textContent.replace('฿', ''));
+                        var totalPrice = parseFloat(document.getElementById('total-amount').textContent.replace('฿', ''));
+                        totalPrice -= itemPrice;
+                        document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
+                        item.remove();
+                        // Call calculateTotal function to update total price after removing item
+                        calculateTotal();
+                    }
+                }
         
-            // Call the function to calculate total price when the page loads
-            window.onload = calculateTotalPrice;
         </script>
     
         <h2>Your Cart</h2>
 
         <div id="shopping-cart">
             <% for (let i = 0; i < cart.length; i++) { %>
-            <div id="item1">
+            <div id="item">
                 <p><%=cart[i].itemname%></p>
-                <span class="item-price"><%=cart[i].qty%></span>
+                <span class="item-qrt"><%=cart[i].qty%></span>
                 <span class="item-price"><%=cart[i].price%></span>
-                <button class="checkout-btn" onclick="removeItem('item1')">Remove Item</button>
+        
+                <button class="checkout-btn" onclick="removeItem('item')" >Remove Item</button>
             </div>
             <br>
             <% } %>
