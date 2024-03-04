@@ -23,6 +23,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage: storage });
 
 app.use(express.static(__dirname + "/public"));
@@ -58,12 +59,31 @@ app.get("/login",(req, res) => {
   }
 });
 
-app.get("/Register",(req, res) => {
+app.get("/register",(req, res) => {
   try {
     res.render("Register");
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.post("/register", async (req, res) => {
+  try {
+    const data = {
+      username: req.body.username,
+      password: req.body.password,
+      tel: req.body.tel,
+      email:req.body.email
+    };
+    console.log(data)
+    await axios.post(base_url + "/register", data);
+
+    res.redirect("/login");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error in /register");
     res.redirect("/");
   }
 });
@@ -292,6 +312,7 @@ app.get("/delete/:id", async (req, res) => {
   }
 });
 // Add menu
+
 app.get("/addmenu", (req, res) => {
   try {
     res.render("addmenu");
@@ -329,19 +350,17 @@ app.get("/addemployee", (req, res) => {
   }
 });
 
-app.post("/addemployee/:id", async (req, res) => {
+app.post("/addemployee",upload.single("img"), async (req, res) => {
   try {
     const data = {
       username: req.body.username,
       password: req.body.password,
       age: req.body.age,
       position: req.body.position,
-      address: req.body.address,
-      tel: req.body.tel,
-      email: req.body.email
+      img:req.file.filename
     };
-    await axios.post(base_url + '/employee' , data);
-            return res.redirect("/updateemployee");
+    await axios.post(base_url + '/Employee' , data);
+          res.redirect("/employee");
     //await axios.put(base_url + "/item/" + req.params.id, data);
    // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
   } catch (err) {
