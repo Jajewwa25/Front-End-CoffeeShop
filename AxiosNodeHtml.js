@@ -81,10 +81,10 @@ app.post("/login", async (req, res) => {
     if (matchedCustomer) {
       // ถ้า username คือ 'Admin' ให้ไปที่หน้า menu1
       if (username === 'Admin') {
-        res.redirect("/menu1");
+       return res.redirect("/menu1");
       } else{
         // ถ้าไม่ใช่ 'Admin' ให้ไปที่หน้า menu
-        res.redirect("/menu");
+        return res.redirect("/menu");
       }
     } else {
       // หากไม่พบข้อมูล customer ในฐานข้อมูลหรือไม่สามารถตรวจสอบได้
