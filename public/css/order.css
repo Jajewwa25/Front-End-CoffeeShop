@@ -181,3 +181,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.ab{
+  text-align: center;
+  font-family: "Anuphan", sans-serif;
+  font-style: normal;
+}
