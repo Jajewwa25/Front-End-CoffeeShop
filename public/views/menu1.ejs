@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%= Item[i].itemname %></h5>
                                 <p class="card-text">Price: <%= Item[i].price %></p>
-                                <input type="number" name="qty" class="qty form-control" min="1" max="99" value="1">
+                                <input type="number" name="qty" class="qty form-control" min="0" max="99" value="0">
                                 <br>
                                 <div class="d-flex justify-content-center mt-2">
                                     <a href="/updatemenu/<%=Item[i].item_id%>" class="btn btn-warning mx-2">Edit</a>

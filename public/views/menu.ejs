@@ -38,14 +38,13 @@
                             <div class="card-body">
                                 <form action="/cart" method="post">
                                 <h5 class="card-title" name="itemname"><%= Item[i].itemname %></h5>
+                                <input type="text" name="customer_id" value="<%=user.customer_id%>" hidden>
                                 <p class="card-text" name="price">Price: <%= Item[i].price %></p>
                                 <input type="hidden" name="item_id" value="<%= Item[i].item_id %>">
                                 <input type="number" name="qty" class="qty form-control" min="0" max="99" value="0">
                                 <br>
                                 <div class="d-flex justify-content-center mt-2">
-                                    <a href="/cart/<%=user.customer_id%>">Add to Cart</a>
                                     <button type="submit" class="btn-add-to-cart">Add to cart 🛒</button>
-
                                 </div>
                             </div>
                         </div>

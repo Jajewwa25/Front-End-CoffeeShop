@@ -136,7 +136,6 @@ app.post("/login", async (req, res) => {
         username: response.data.customer.username,
       };
 
-      console.log(req.session.user);
       res.redirect("menu");
     } else if (response.data.message == "User_not_found") {
       console.log("User Not Found");
@@ -191,11 +190,14 @@ app.get("/about",authenticateUser,async (req, res) => {
 app.get("/menu",authenticateUser,async (req, res) => {
   try {
     const response = await axios.get(base_url + "/menu")
+
     if (!req.session.user) {
+      console.log("Logged in")
       req.session.user = {
         customer_id: "0"
       };
     }
+    
     res.render("menu", {Item:response.data,user:req.session.user});
     
   } catch (err) {
@@ -460,36 +462,75 @@ app.post("/addemployee",upload.single("img"), authenticateUser,async (req, res) 
   }
 });
 
+////ไฟล์แพรวา/////
+// app.get("/cart/:id",authenticateUser,async(req, res) => {
+//   try {
+//     const response = await axios.get(
+//       base_url + "/cart/" +  req.session.user.customer_id
+//     );
+//     console.log(response.data)
+//     res.render("cart",{ cart: response.data });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("error");
+//     res.redirect("/");
+//   }
+// });
 
-app.get("/cart/:id",authenticateUser,async(req, res) => {
+// app.post("/cart", authenticateUser,async (req, res) => {
+//   try {
+//     const data = {
+//       item_id:req.body.item_id,
+//       customer_id:req.session.user.customer_id,
+//       qty:req.body.qty
+//     };
+//     const response = await axios.post(base_url + "/cart", data);
+//     res.redirect("/cart/" + req.session.user.customer_id);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send("error in /cart");
+//     res.redirect("/");
+//   }
+// });
+
+////ไฟล์ chat GPT /////
+app.get("/cart/:id", authenticateUser, async (req, res) => {
   try {
+    const customerId = req.session.user ? req.session.user.customer_id : null;
+    if (!customerId) {
+      return res.status(400).send("Customer ID not found");
+    }
     const response = await axios.get(
-      base_url + "/cart/" +  req.session.user.customer_id
+      base_url + "/cart/" + customerId
     );
     console.log(response.data)
-    res.render("cart",{ cart: response.data });
+    res.render("cart", { cart: response.data });
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
-    res.redirect("/");
   }
 });
 
-app.post("/cart", authenticateUser,async (req, res) => {
+app.post("/cart", authenticateUser, async (req, res) => {
   try {
-    const data = {
-      item_id:req.body.item_id,
-      customer_id:req.session.user.customer_id,
-      qty:req.body.qty
+    const customerId = req.session.user ? req.session.user.customer_id : null;
+    if (!customerId) {
+      return res.status(400).send("Customer ID not found");
+    }
+    const item_data = {
+      item_id: req.body.item_id,
+      customer_id: customerId,
+      qty: req.body.qty
     };
-    const response = await axios.post(base_url + "/cart", data);
-    res.redirect("/cart/" + req.session.user.customer_id);
+    const response = await axios.post(base_url + "/cart", item_data);
+    res.render("cart" , {cart : response.data, customer_id: customerId});
   } catch (err) {
     console.error(err);
     res.status(500).send("error in /cart");
-    res.redirect("/");
   }
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
