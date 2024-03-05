@@ -92,7 +92,7 @@ app.post("/login", async (req, res) => {
       // หากไม่พบข้อมูล customer ในฐานข้อมูลหรือไม่สามารถตรวจสอบได้
       // สามารถเพิ่มการจัดการข้อผิดพลาดเพื่อแจ้งให้ผู้ใช้รู้ว่าข้อมูลไม่ถูกต้อง
       // หรือทำการเข้าสู่ระบบใหม่อีกครั้งได้ตามต้องการ
-
+      
       res.redirect("/login");
     }
   } catch (err) {
@@ -306,7 +306,6 @@ app.get("/updatemenu/:id", async (req, res) => {
   }
 });
 
-
 app.post("/updatemenu/:id",upload.single("img"), async (req, res) => {
   try {
     const data = {
@@ -436,9 +435,6 @@ app.post("/cart", async (req, res) => {
     res.redirect("/");
   }
 });
-
-
-
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
