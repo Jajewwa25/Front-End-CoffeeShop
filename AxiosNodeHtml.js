@@ -6,9 +6,9 @@ const multer = require("multer");
 var bodyParser = require("body-parser");
 const { clearConfigCache } = require("prettier");
 
-//const base_url = "http://node59553-env-5865143.proen.app.ruk-com.cloud:11485";
+//const base_url = "http://node59554-env-5865143.proen.app.ruk-com.cloud";
 const base_url = "http://localhost:3000";
-//"body-parser": "^1.20.2",
+//"body-parser": "^1.20.2";
 
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
