@@ -44,9 +44,11 @@
             <% for (let i = 0; i < cart.length; i++) { %>
             <div class="item" id="item<%= i %>">
                 <p><%= cart[i].itemname %></p>
-                <span class="item-qrt"><%= cart[i].qty %></span>
+                <p><%= cart[i].qty %></p>
+                <p><%= cart[i].price %></p>
+                <!-- <span class="item-qrt"><%= cart[i].qty %></span> -->
                 <!-- แก้การแสดงราคาเพื่อให้แสดงเป็นราคารวมของแต่ละรายการ -->
-                <span class="item-price">฿<%= cart[i].qty * cart[i].price %></span>
+                <!-- <span class="item-price">฿<%= cart[i].qty * cart[i].price %></span> -->
                 <button class="checkout-btn" onclick="removeItem('item<%= i %>')">Remove Item</button>
             </div>
             <br>

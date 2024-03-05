@@ -5,6 +5,8 @@ const path = require("path");
 const multer = require("multer");
 var bodyParser = require("body-parser");
 const { clearConfigCache } = require("prettier");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 //const base_url = "http://node59554-env-5865143.proen.app.ruk-com.cloud";
 const base_url = "http://localhost:3000";
@@ -13,7 +15,15 @@ const base_url = "http://localhost:3000";
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.set("views", path.join(__dirname, "/public/views"));
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -28,7 +38,35 @@ const upload = multer({ storage: storage });
 
 app.use(express.static(__dirname + "/public"));
 
-app.get("/order", async(req, res) => {
+const authenticateUser = (req, res, next) => {
+  if (req.cookies && req.cookies.userSession) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+};
+
+app.get("/",(req, res) => {
+  try {
+    res.render("home");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.get("/home",(req, res) => {
+  try {
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+app.get("/order",authenticateUser,async(req, res) => {
   try {
     const response = await axios.get(base_url + "/order")
     console.log(response.data);
@@ -39,15 +77,19 @@ app.get("/order", async(req, res) => {
   }
 });
 
-app.get("/home",(req, res) => {
+app.get("/order1", authenticateUser, async (req, res) => {
   try {
-    res.render("home");
+    // ดึงข้อมูลการสั่งซื้อจากเซิร์ฟเวอร์
+    const response = await axios.get(base_url + "/order");
+    // ส่งข้อมูลการสั่งซื้อไปยังเทมเพลต "order1" เพื่อแสดงผลบนหน้าเว็บไซต์
+    res.render("order1", { order: response.data });
   } catch (err) {
-    console.error(err);
     res.status(500).send("error");
     res.redirect("/");
   }
 });
+
+
 
 app.get("/login",(req, res) => {
   try {
@@ -72,29 +114,37 @@ app.get("/register",(req, res) => {
 app.post("/login", async (req, res) => {
   try {
     // ดึงข้อมูล customer จากฐานข้อมูลหรือที่เก็บข้อมูล
-    const customers = await axios.get(base_url + "/customer");
-    const { username, password } = req.body;
-
-    // เช็คว่ามี customer ที่มี username และ password ตรงกับที่รับเข้ามาหรือไม่
-    const matchedCustomer = customers.data.find(
-      (customer) => customer.username == username && customer.password == password
-    );
-
-    if (matchedCustomer) {
-      // ถ้า username คือ 'Admin' ให้ไปที่หน้า menu1
-      if (username === 'Admin') {
-       return res.redirect("/menu1");
-      } else{
-        // ถ้าไม่ใช่ 'Admin' ให้ไปที่หน้า menu
-        return res.redirect("/menu");
-      }
-    } else {
-      // หากไม่พบข้อมูล customer ในฐานข้อมูลหรือไม่สามารถตรวจสอบได้
-      // สามารถเพิ่มการจัดการข้อผิดพลาดเพื่อแจ้งให้ผู้ใช้รู้ว่าข้อมูลไม่ถูกต้อง
-      // หรือทำการเข้าสู่ระบบใหม่อีกครั้งได้ตามต้องการ
-      
-      res.redirect("/login");
+    const data = {
+      username:req.body.username,
+      password:req.body.password
     }
+    const response = await axios.post(base_url + "/login" , data);
+    if (response.data.message == true) {
+       res.cookie("userSession", response.data.customer.username, { httpOnly: true });
+      console.log(response.data.customer.username, "Login Successful");
+
+      if(response.data.customer.username == "Admin"){
+        req.session.user = {
+          customer_id: response.data.customer.customer_id,
+          username: response.data.customer.username,
+        };
+        return res.redirect("menu1")
+      }
+
+      req.session.user = {
+        customer_id: response.data.customer.customer_id,
+        username: response.data.customer.username,
+      };
+
+      console.log(req.session.user);
+      res.redirect("menu");
+    } else if (response.data.message == "User_not_found") {
+      console.log("User Not Found");
+      res.redirect("login");
+    } else if (response.data.message == "Wrong_Password") {
+      console.log("Wrong Password");
+      res.redirect("login");
+    }    
   } catch (err) {
     console.error(err);
     res.status(500).send("Error");
@@ -102,7 +152,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
-  res.redirect("/login");
+  req.session.user = null;
+  res.clearCookie("userSession");
+  res.redirect("/");
 });
 
 app.post("/register", async (req, res) => {
@@ -124,7 +176,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.get("/about",async (req, res) => {
+app.get("/about",authenticateUser,async (req, res) => {
   try {
     const response = await axios.get(base_url + "/about")
     console.log(response.data);
@@ -136,11 +188,16 @@ app.get("/about",async (req, res) => {
   }
 });
 
-app.get("/menu",async (req, res) => {
+app.get("/menu",authenticateUser,async (req, res) => {
   try {
     const response = await axios.get(base_url + "/menu")
-    console.log(response.data);
-    res.render("menu", {Item:response.data});
+    if (!req.session.user) {
+      req.session.user = {
+        customer_id: "0"
+      };
+    }
+    res.render("menu", {Item:response.data,user:req.session.user});
+    
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
@@ -148,7 +205,7 @@ app.get("/menu",async (req, res) => {
   }
 });
 
-app.get("/menu1",async (req, res) => {
+app.get("/menu1",authenticateUser,async (req, res) => {
   try {
     const response = await axios.get(base_url + "/menu1")
     console.log(response.data);
@@ -160,7 +217,7 @@ app.get("/menu1",async (req, res) => {
   }
 });
 
-app.get("/customer", async(req, res) => {
+app.get("/customer",authenticateUser, async(req, res) => {
   try {
     const response = await axios.get(base_url + "/customer")
     console.log(response.data);
@@ -171,7 +228,7 @@ app.get("/customer", async(req, res) => {
   }
 });
 
-app.get("/customer/:id", async(req, res) => {
+app.get("/customer/:id", authenticateUser,async(req, res) => {
   try {
     const response = await axios.get(base_url + "/customer/" + req.params.id)
     res.render("onecustomer", {customer:response.data});
@@ -181,7 +238,7 @@ app.get("/customer/:id", async(req, res) => {
   }
 });
 
-app.get("/updatecustomer/:id", async (req, res) => {
+app.get("/updatecustomer/:id", authenticateUser,async (req, res) => {
   try {
     const response = await axios.get(base_url + "/customer/" + req.params.id);
     res.render("updatecustomer", { customer: response.data });
@@ -192,7 +249,7 @@ app.get("/updatecustomer/:id", async (req, res) => {
 });
 
 
-app.post("/updatecustomer/:id", async (req, res) => {
+app.post("/updatecustomer/:id", authenticateUser,async (req, res) => {
   try {
     const data = { username: req.body.username, tel: req.body.tel,
       email:req.body.email,date:req.body.date };
@@ -204,7 +261,7 @@ app.post("/updatecustomer/:id", async (req, res) => {
   }
 });
 
-app.get("/deletecustomer/:id", async (req, res) => {
+app.get("/deletecustomer/:id",authenticateUser, async (req, res) => {
   try {
     await axios.delete(base_url + "/customer/" + req.params.id);
     res.redirect("/customer");
@@ -216,7 +273,7 @@ app.get("/deletecustomer/:id", async (req, res) => {
 
 //--------------------------------------
 
-app.get("/employee", async(req, res) => {
+app.get("/employee", authenticateUser,async(req, res) => {
   try {
     const response = await axios.get(base_url + "/employee")
     console.log(response.data);
@@ -227,7 +284,7 @@ app.get("/employee", async(req, res) => {
   }
 });
 
-app.get("/employee/:id", async(req, res) => {
+app.get("/employee/:id",authenticateUser, async(req, res) => {
   try {
     const response = await axios.get(base_url + "/employee/" + req.params.id)
     res.render("oneemployee", {Employee:response.data});
@@ -237,7 +294,7 @@ app.get("/employee/:id", async(req, res) => {
   }
 });
 
-app.get("/updateemployee/:id", async (req, res) => { 
+app.get("/updateemployee/:id", authenticateUser,async (req, res) => { 
   try {
     const response = await axios.get(base_url + "/employee/" + req.params.id);
     res.render("updateemployee", { Employee: response.data });
@@ -247,7 +304,7 @@ app.get("/updateemployee/:id", async (req, res) => {
   }
 });
 
-app.post("/updateemployee/:id",upload.single("img"), async (req, res) => {
+app.post("/updateemployee/:id",upload.single("img"),authenticateUser, async (req, res) => {
   try {
     const data = { username: req.body.username,
       password: req.body.password,
@@ -263,7 +320,7 @@ app.post("/updateemployee/:id",upload.single("img"), async (req, res) => {
   }
 });
 
-app.get("/deleteemployee/:id", async (req, res) => {
+app.get("/deleteemployee/:id", authenticateUser,async (req, res) => {
   try {
     await axios.delete(base_url + "/Employee/" + req.params.id);
     res.redirect("/employee");
@@ -274,7 +331,7 @@ app.get("/deleteemployee/:id", async (req, res) => {
 });
 
 //
-app.get("/item", async (req, res) => {
+app.get("/item",authenticateUser, async (req, res) => {
   try {
     const response = await axios.get(base_url + "/item");
     console.log(response.data);
@@ -285,7 +342,7 @@ app.get("/item", async (req, res) => {
   }
 });
 
-app.get("/item/:id", async(req, res) => {
+app.get("/item/:id", authenticateUser,async(req, res) => {
   try {
     const response = await axios.get(base_url + "/item/" + req.params.id)
     res.render("onemenu", {Item:response.data});
@@ -296,7 +353,7 @@ app.get("/item/:id", async(req, res) => {
 });
 
 
-app.get("/updatemenu/:id", async (req, res) => { 
+app.get("/updatemenu/:id",authenticateUser, async (req, res) => { 
   try {
     const response = await axios.get(base_url + "/item/" + req.params.id);
     res.render("updatemenu", { Item: response.data });
@@ -306,7 +363,7 @@ app.get("/updatemenu/:id", async (req, res) => {
   }
 });
 
-app.post("/updatemenu/:id",upload.single("img"), async (req, res) => {
+app.post("/updatemenu/:id",upload.single("img"), authenticateUser,async (req, res) => {
   try {
     const data = {
       itemname: req.body.itemname,
@@ -324,7 +381,7 @@ app.post("/updatemenu/:id",upload.single("img"), async (req, res) => {
 
 
 
-app.get("/deletemenu/:id", async (req, res) => {
+app.get("/deletemenu/:id", authenticateUser,async (req, res) => {
   try {
     await axios.delete(base_url + "/item/" + req.params.id);
     res.redirect("/item");
@@ -336,7 +393,7 @@ app.get("/deletemenu/:id", async (req, res) => {
 
 
 
-app.get("/delete/:id", async (req, res) => {
+app.get("/delete/:id", authenticateUser,async (req, res) => {
   try{
       await axios.delete(base_url + '/Item/'+ req.params.id);
       res.redirect("/menu1");
@@ -347,7 +404,7 @@ app.get("/delete/:id", async (req, res) => {
 });
 // Add menu
 
-app.get("/addmenu", (req, res) => {
+app.get("/addmenu", authenticateUser,(req, res) => {
   try {
     res.render("addmenu");
   } catch (err) {
@@ -357,7 +414,7 @@ app.get("/addmenu", (req, res) => {
   }
 });
 
-app.post("/addmenu",upload.single("img"), async (req, res) => {
+app.post("/addmenu",upload.single("img"), authenticateUser,async (req, res) => {
   try {
     const data = {
       itemname: req.body.itemname,
@@ -374,7 +431,7 @@ app.post("/addmenu",upload.single("img"), async (req, res) => {
   }
 });
 // addemployee
-app.get("/addemployee", (req, res) => {
+app.get("/addemployee", authenticateUser,(req, res) => {
   try {
     res.render("addemployee");
   } catch (err) {
@@ -384,7 +441,7 @@ app.get("/addemployee", (req, res) => {
   }
 });
 
-app.post("/addemployee",upload.single("img"), async (req, res) => {
+app.post("/addemployee",upload.single("img"), authenticateUser,async (req, res) => {
   try {
     const data = {
       username: req.body.username,
@@ -404,13 +461,13 @@ app.post("/addemployee",upload.single("img"), async (req, res) => {
 });
 
 
-app.get("/cart",async(req, res) => {
+app.get("/cart/:id",authenticateUser,async(req, res) => {
   try {
     const response = await axios.get(
-      base_url + "/cart"
+      base_url + "/cart/" +  req.session.user.customer_id
     );
-    console.log(response.data);
-    res.render("cart",{cart:response.data});
+    console.log(response.data)
+    res.render("cart",{ cart: response.data });
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
@@ -418,17 +475,15 @@ app.get("/cart",async(req, res) => {
   }
 });
 
-app.post("/cart", async (req, res) => {
+app.post("/cart", authenticateUser,async (req, res) => {
   try {
     const data = {
       item_id:req.body.item_id,
-      customer_id:1,
+      customer_id:req.session.user.customer_id,
       qty:req.body.qty
     };
-    console.log(data)
     const response = await axios.post(base_url + "/cart", data);
-    console.log(response)
-    res.redirect("/cart");
+    res.redirect("/cart/" + req.session.user.customer_id);
   } catch (err) {
     console.error(err);
     res.status(500).send("error in /cart");

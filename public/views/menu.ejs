@@ -16,7 +16,7 @@
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/menu">Menu</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/cart/<%=user.customer_id%>">Cart</a></li>
             <li><a href="/logout">Log out</a></li>
         </ul>
     </nav>
@@ -43,6 +43,7 @@
                                 <input type="number" name="qty" class="qty form-control" min="0" max="99" value="0">
                                 <br>
                                 <div class="d-flex justify-content-center mt-2">
+                                    <a href="/cart/<%=user.customer_id%>">Add to Cart</a>
                                     <button type="submit" class="btn-add-to-cart">Add to cart 🛒</button>
 
                                 </div>
