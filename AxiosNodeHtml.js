@@ -504,7 +504,7 @@ app.get("/cart/:id", authenticateUser, async (req, res) => {
       base_url + "/cart/" + customerId
     );
     console.log(response.data)
-    res.render("cart", { cart: response.data });
+    res.render("cart", { order: response.data });
   } catch (err) {
     console.error(err);
     res.status(500).send("error");
@@ -516,6 +516,7 @@ app.post("/cart", authenticateUser, async (req, res) => {
     const customerId = req.session.user ? req.session.user.customer_id : null;
     if (!customerId) {
       return res.status(400).send("Customer ID not found");
+      
     }
     const item_data = {
       item_id: req.body.item_id,
@@ -523,13 +524,14 @@ app.post("/cart", authenticateUser, async (req, res) => {
       qty: req.body.qty
     };
     const response = await axios.post(base_url + "/cart", item_data);
-    res.render("cart" , {cart : response.data, customer_id: customerId});
+    res.render("cart" , {order : response.data, customer_id: customerId});
   } catch (err) {
     console.error(err);
-    res.status(500).send("error in /cart");
+    res.status(500).send("error in cart");
   }
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 app.listen(5500, () => {

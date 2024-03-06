@@ -11,7 +11,7 @@
         <h1>Shopping Cart</h1>
     </header>
 
-    <main>
+     <main>
 
         <script>
             function removeItem(itemId) {
@@ -46,10 +46,10 @@
                 <p><%= cart[i].itemname %></p>
                 <p><%= cart[i].price %></p>
                 <p><%= cart[i].qty %></p> 
-                <span class="item-qrt"><%= cart[i].qty %></span> 
+                <!--<span class="item-qrt"><%= cart[i].qty %></span> -->
                 <!-- แก้การแสดงราคาเพื่อให้แสดงเป็นราคารวมของแต่ละรายการ -->
                 <!-- <span class="item-price">฿<%= cart[i].qty * cart[i].price %></span> -->
-                <button class="checkout-btn" onclick="removeItem('item<%= i %>')">Remove Item</button>
+                <!-- <button class="checkout-btn" onclick="removeItem('item<%= i %>')">Remove Item</button>-->
             </div>
             <br>
             <% } %>
@@ -62,6 +62,6 @@
             <button class="checkout-btn"><a href="/menu">Back</a></button>
             <button class="checkout-btn"><a href="order">Pay</a></button>
         </center>
-    </main>
+    </main> 
 </body>
-</html>
+</html> 
