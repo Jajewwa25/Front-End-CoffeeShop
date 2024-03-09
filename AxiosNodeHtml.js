@@ -253,8 +253,10 @@ app.get("/updatecustomer/:id", authenticateUser,async (req, res) => {
 
 app.post("/updatecustomer/:id", authenticateUser,async (req, res) => {
   try {
-    const data = { username: req.body.username, tel: req.body.tel,
-      email:req.body.email,date:req.body.date };
+    const data = { username: req.body.username, 
+      tel: req.body.tel,
+      email:req.body.email,
+      date:req.body.date };
     await axios.put(base_url + "/customer/" + req.params.id, data);
     res.redirect("/customer/" + req.params.id);
   } catch (err) {
@@ -462,75 +464,47 @@ app.post("/addemployee",upload.single("img"), authenticateUser,async (req, res) 
   }
 });
 
-////ไฟล์แพรวา/////
-// app.get("/cart/:id",authenticateUser,async(req, res) => {
+app.get("/cart",authenticateUser,async(req, res) => {
+
+  
+  try {
+    const response = await axios.get(base_url + "/order")
+    console.log(response.data);
+    res.render("cart", {order:response.data,user:req.session.user});
+  } catch (err) {
+    res.status(500).send("error");
+    res.redirect("/");
+  }
+});
+
+
+
+// app.get("/cart", authenticateUser,(req, res) => {
 //   try {
-//     const response = await axios.get(
-//       base_url + "/cart/" +  req.session.user.customer_id
-//     );
-//     console.log(response.data)
-//     res.render("cart",{ cart: response.data });
+//     res.render("cart", {Order: req.Order});
 //   } catch (err) {
 //     console.error(err);
 //     res.status(500).send("error");
-//     res.redirect("/");
+//     res.redirect("/menu");
 //   }
 // });
 
 // app.post("/cart", authenticateUser,async (req, res) => {
 //   try {
 //     const data = {
-//       item_id:req.body.item_id,
-//       customer_id:req.session.user.customer_id,
-//       qty:req.body.qty
+//       item_id: req.body.item_id,
+//       customer_id: req.body.customer_id,
+//       qty: req.body.qty
 //     };
-//     const response = await axios.post(base_url + "/cart", data);
-//     res.redirect("/cart/" + req.session.user.customer_id);
+//     await axios.post(base_url + '/Orders' , data);
+//     res.redirect("/cart");
+  
 //   } catch (err) {
 //     console.error(err);
-//     res.status(500).send("error in /cart");
-//     res.redirect("/");
+//     res.status(500).send("Error");
 //   }
 // });
 
-////ไฟล์ chat GPT /////
-app.get("/cart/:id", authenticateUser, async (req, res) => {
-  try {
-    const customerId = req.session.user ? req.session.user.customer_id : null;
-    if (!customerId) {
-      return res.status(400).send("Customer ID not found");
-    }
-    const response = await axios.get(
-      base_url + "/cart/" + customerId
-    );
-    console.log(response.data)
-    res.render("cart", { order: response.data });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("error");
-  }
-});
-
-app.post("/cart", authenticateUser, async (req, res) => {
-  try {
-    const customerId = req.session.user ? req.session.user.customer_id : null;
-    if (!customerId) {
-      return res.status(400).send("Customer ID not found");
-      
-    }
-    const item_data = {
-      item_id: req.body.item_id,
-      customer_id: customerId,
-      qty: req.body.qty
-    };
-    const response = await axios.post(base_url + "/cart", item_data);
-    res.render("cart" , {order : response.data, customer_id: customerId});
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("error in cart");
-  }
-});
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
