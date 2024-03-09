@@ -476,7 +476,7 @@ app.get("/cart",authenticateUser,async(req, res) => {
     res.redirect("/");
   }
 });
-app.post("/cart/:customer_id", authenticateUser, async (req, res) => {
+app.post("/cart", authenticateUser, async (req, res) => {
     try {
       const customerId = req.session.user ? req.session.user.customer_id : null;
       if (!customerId) {
@@ -488,14 +488,14 @@ app.post("/cart/:customer_id", authenticateUser, async (req, res) => {
         customer_id: customerId,
         qty: req.body.qty
       };
-      const response = await axios.post(base_url + "/cart", item_data);
-      res.render("/cart/:customer_id" , {order : response.data, customer_id: customerId});
+      const response = await axios.get(base_url + "/order", item_data)
+      console.log(response.data);
+      res.render("cart", {order:response.data});
     } catch (err) {
       console.error(err);
       res.status(500).send("error in cart");
     }
   });
-
 // app.get("/cart", authenticateUser,(req, res) => {
 //   try {
 //     res.render("cart", {Order: req.Order});
@@ -521,10 +521,6 @@ app.post("/cart/:customer_id", authenticateUser, async (req, res) => {
 //     res.status(500).send("Error");
 //   }
 // });
-
-
-
-
 app.listen(5500, () => {
   console.log("server started on port 5500");
 });
