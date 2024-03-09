@@ -8,9 +8,17 @@
 </head>
 <body>
     <h1>Order Details</h1>
-    <p>Order ID: <%= order.order_id %></p>
-    <p>Product Name: <%= order.item_id %></p>
-    <p>Quantity: <%= order.qty %></p>
+    <% for(let i = 1; i < order.length; i++) { %>
+        <div class="order" id="order<%= i %>">
+            <p>Name: <%= order[i].itemname %></p>
+            <p>Price: <%= order[i].price %></p>
+            <p>Quantity: <%= order[i].qty %></p> 
+
+            <a href="" class="btn btn-warning mx-2">Accept</a>
+            <a href=""class="btn btn-warning mx-2">Delete</a>
+        </div>
+        <br>
+    <% } %>
 </body>
 </html>
 

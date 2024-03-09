@@ -476,8 +476,25 @@ app.get("/cart",authenticateUser,async(req, res) => {
     res.redirect("/");
   }
 });
-
-
+app.post("/cart/:customer_id", authenticateUser, async (req, res) => {
+    try {
+      const customerId = req.session.user ? req.session.user.customer_id : null;
+      if (!customerId) {
+        return res.status(400).send("Customer ID not found");
+  
+      }
+      const item_data = {
+        item_id: req.body.item_id,
+        customer_id: customerId,
+        qty: req.body.qty
+      };
+      const response = await axios.post(base_url + "/cart", item_data);
+      res.render("/cart/:customer_id" , {order : response.data, customer_id: customerId});
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("error in cart");
+    }
+  });
 
 // app.get("/cart", authenticateUser,(req, res) => {
 //   try {
