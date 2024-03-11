@@ -1,0 +1,70 @@
+/* order.css */
+
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set box-sizing to border-box for easier layout */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* Body styles */
+  body {
+    font-family: "Anuphan", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  /* Container for order details */
+  .order-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+  }
+  
+  /* Heading styles */
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Order item styles */
+  .order {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  /* Paragraph styles */
+  .order p {
+    margin: 0;
+  }
+  
+  /* Button styles */
+  .buttons a {
+    padding: 10px 20px;
+    background-color: #fed330;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttons a:hover {
+    background-color: #feca57;
+  }
+  

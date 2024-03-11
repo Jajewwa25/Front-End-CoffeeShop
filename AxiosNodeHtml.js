@@ -82,7 +82,7 @@ app.get("/order1", authenticateUser, async (req, res) => {
     // ดึงข้อมูลการสั่งซื้อจากเซิร์ฟเวอร์
     const response = await axios.get(base_url + "/order");
     // ส่งข้อมูลการสั่งซื้อไปยังเทมเพลต "order1" เพื่อแสดงผลบนหน้าเว็บไซต์
-    res.render("order1", { order: response.data });
+    res.render("order1", { Order: response.data });
   } catch (err) {
     res.status(500).send("error");
     res.redirect("/");
@@ -204,6 +204,24 @@ app.get("/menu",authenticateUser,async (req, res) => {
     console.error(err);
     res.status(500).send("error");
     res.redirect("/");
+  }
+});
+
+app.post("/menu", authenticateUser,async (req, res) => {
+  try {
+    const data = {
+      customer_id: req.body.customer_id,
+      item_id: req.body.item_id,
+      qty: req.body.qty
+    };
+    console.log(data);
+    await axios.post(base_url + '/Order' , data);
+          res.redirect("/menu");
+    //await axios.put(base_url + "/item/" + req.params.id, data);
+   // res.redirect("/item"); // เมื่ออัปเดตเสร็จแล้วให้ redirect ไปยังหน้า "/item"
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error");
   }
 });
 

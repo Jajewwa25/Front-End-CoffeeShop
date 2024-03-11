@@ -3,22 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/order.css"/>
+    <link rel="stylesheet" href="../css/order1.css"/>
     <title>Order Details</title>
+    <style>
+        .Order {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 60%;
+        }
+        .Order p {
+            margin: 0;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .textD p {
+            display: inline-block;
+            margin: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Order Details</h1>
-    <% for(let i = 1; i < order.length; i++) { %>
-        <div class="order" id="order<%= i %>">
-            <p>Name: <%= order[i].itemname %></p>
-            <p>Price: <%= order[i].price %></p>
-            <p>Quantity: <%= order[i].qty %></p> 
+    <script>
+        function calculateTotal() {
+            var totalPrice = 0;
+            var items = document.querySelectorAll('.Order');
+            items.forEach(function (item) {
+                var itemId = item.querySelector('.item-id').textContent;
+                var quantity = item.querySelector('.quantity').textContent;
+                fetch(`/getPrice?itemId=${itemId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var price = data.price;
+                        totalPrice += price * quantity;
+                        document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
+                    });
+            });
+        }
+        // เรียกใช้ฟังก์ชั่นเมื่อหน้าเว็บโหลดเสร็จ
+        window.onload = calculateTotal;
+    </script>
 
-            <a href="" class="btn btn-warning mx-2">Accept</a>
-            <a href=""class="btn btn-warning mx-2">Delete</a>
-        </div>
-        <br>
-    <% } %>
+    <h1>Order Details</h1>
+    <center>
+        <% for(let i = 0; i < Order.length; i++) { %>
+            <div class="Order" id="Order<%= i %>">
+                <div class="textD">
+                    <p class="item-id">CustomerId: <%= Order[i].customer_id %></p>
+                    <p class="item-id">ItemId: <%= Order[i].item_id %></p>
+                    <p class="quantity">Quantity: <%= Order[i].qty %></p>
+                    <p> Total:
+                        <span id="total-amount">฿0.00</span>
+                    </p>
+                </div>
+                <div class="buttons">
+                    <a href="" class="btn btn-warning mx-2">Accept</a>
+                </div>
+            </div>
+        <% } %>
+    </center>
+    <center><a href="/menu1">Back to Menu</a></center>
 </body>
 </html>
-

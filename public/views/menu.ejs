@@ -16,7 +16,7 @@
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/menu">Menu</a></li>
-            <li><a href="/cart">Cart</a></li>
+            <li><a href="/cart">Order</a></li>
             <li><a href="/logout">Log out</a></li>
         </ul>
     </nav>
@@ -36,13 +36,13 @@
                         <div class="card">
                             <img class="card-img-top" src="../uploaded_img/<%= Item[i].img %>" alt="Card image cap">
                             <div class="card-body">
-                                <form action="/cart" method="post">
-                                <h5 class="card-title" name="itemname"><%= Item[i].itemname %></h5>
-                                <input type="text" name="customer_id" value="<%=user.customer_id%>" hidden>
-                                <p class="card-text" name="price">Price: <%= Item[i].price %></p>
-                                <input type="hidden" name="item_id" value="<%= Item[i].item_id %>">
-                                <input type="number" name="qty" class="qty form-control" min="0" max="99" value="0">
-                                <br>
+                                <form action="/menu" method="post">
+                                    <h5 class="card-title" name="itemname"><%= Item[i].itemname %></h5>
+                                    <input type="text" name="customer_id" value="<%=user.customer_id%>" hidden>
+                                    <p class="card-text" name="price">Price: <%= Item[i].price %></p>
+                                    <input type="hidden" name="item_id" value="<%= Item[i].item_id %>">
+                                    <input type="number" name="qty" class="qty form-control" min="0" max="99" value="0">
+                                    <br>
                                 <div class="d-flex justify-content-center mt-2">
                                     <button type="submit" class="btn-add-to-cart">Add to cart 🛒</button>
                                 </div>
