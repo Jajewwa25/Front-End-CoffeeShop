@@ -29,45 +29,42 @@
     </style>
 </head>
 <body>
-    <script>
-        function calculateTotal() {
-            var totalPrice = 0;
-            var items = document.querySelectorAll('.Order');
-            items.forEach(function (item) {
-                var itemId = item.querySelector('.item-id').textContent;
-                var quantity = item.querySelector('.quantity').textContent;
-                fetch(`/getPrice?itemId=${itemId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        var price = data.price;
-                        totalPrice += price * quantity;
-                        document.getElementById('total-amount').textContent = '฿' + totalPrice.toFixed(2);
-                    });
-            });
-        }
-        // เรียกใช้ฟังก์ชั่นเมื่อหน้าเว็บโหลดเสร็จ
-        window.onload = calculateTotal;
-    </script>
-
     <h1>Order Details</h1>
     <center>
         <% for(let i = 0; i < Order.length; i++) { %>
             <div class="Order" id="Order<%= i %>">
                 <div class="textD">
-                    <p class="item-id">CustomerId: <%= Order[i].customer_id %></p>
-                    <p class="item-id">ItemId: <%= Order[i].item_id %></p>
+                    <p class="item-id">Customer ID: <%= Order[i].customer_id %></p>
+                    <p class="item-id">Item ID: <%= Order[i].item_id %></p>
                     <p class="quantity">Quantity: <%= Order[i].qty %></p>
-                    <p> Total:
-                        <span id="total-amount">฿0.00</span>
-                    </p>
+                    <p class="total">Total: <span class="total-amount">฿0.00</span></p>
                 </div>
                 <div class="buttons">
                     <a href="/deleteorder/<%= Order[i].Order_id%>" class="btn btn-warning mx-2">Accept</a>
-                   
                 </div>
             </div>
         <% } %>
     </center>
     <center><a href="/menu1">Back to Menu</a></center>
+
+    <script>
+        function calculateTotal() {
+            var items = document.querySelectorAll('.Order');
+            items.forEach(function (item) {
+                var itemId = item.querySelector('.item-id:nth-child(2)').textContent.split(':')[1].trim();
+                var quantity = parseInt(item.querySelector('.quantity').textContent.split(':')[1].trim());
+                fetch(`/getPrice?itemId=${itemId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        var price = data.Price;
+                        var total = Price * quantity;
+                        item.querySelector('.total-amount').textContent = '฿' + total.toFixed(2);
+                        item.querySelector('.total').textContent = `Total: ฿${Price} * ${quantity} = ฿${total.toFixed(2)}`;
+                    });
+            });
+        }
+
+        window.onload = calculateTotal;
+    </script>
 </body>
 </html>
