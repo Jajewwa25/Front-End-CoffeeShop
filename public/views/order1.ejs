@@ -32,7 +32,7 @@
     <h1>Order Details</h1>
     <center>
         <% for(let i = 0; i < Order.length; i++) { %>
-            <div class="Order" id="Order<%= i %>">
+            <div class="Order" >
                 <div class="textD">
                     <p class="item-id">Customer ID: <%= Order[i].customer_id %></p>
                     <p class="item-id">Item ID: <%= Order[i].item_id %></p>
@@ -40,7 +40,7 @@
                     <p class="total">Total: <span class="total-amount">฿0.00</span></p>
                 </div>
                 <div class="buttons">
-                    <a href="/deleteorder/<%= Order[i].Order_id%>" class="btn btn-warning mx-2">Accept</a>
+                    <a href="/deleteorder/<%= Order[i].order_id %>" class="btn btn-warning mx-2">Accept</a>
                 </div>
             </div>
         <% } %>

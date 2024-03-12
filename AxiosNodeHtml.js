@@ -91,7 +91,7 @@ app.get("/order1", authenticateUser, async (req, res) => {
 
 app.get("/deleteorder/:id", authenticateUser,async (req, res) => {
   try {
-    await axios.delete(base_url + "/Order/" + req.params.id);
+    await axios.delete(base_url + "/order/" + req.params.id);
     res.redirect("/order1");
   } catch (err) {
     console.error(err);
