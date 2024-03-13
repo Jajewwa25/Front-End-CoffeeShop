@@ -31,40 +31,24 @@
 <body>
     <h1>Order Details</h1>
     <center>
-        <% for(let i = 0; i < Order.length; i++) { %>
+        <% for(let i = 0; i < Order[0].length; i++) { %>
             <div class="Order" >
                 <div class="textD">
-                    <p class="item-id">Customer ID: <%= Order[i].customer_id %></p>
-                    <p class="item-id">Item ID: <%= Order[i].item_id %></p>
-                    <p class="quantity">Quantity: <%= Order[i].qty %></p>
-                    <p class="total">Total: <span class="total-amount">฿0.00</span></p>
+                    <p></p>
+                    <p class="item-id">Customer ID: <%= Order[0][i].customer_id %></p>
+                    <p class="item-id">Customer Name: <%= Customer[i].username %></p>
+                    <p class="item-id">Item ID: <%= Order[0][i].item_id %></p>
+                    <p class="item-name">Item Name: <%= Item[i].itemname %></p>
+                    <p class="quantity">Quantity: <%= Order[0][i].qty %></p>
+                    <p class="total">Total: <span class="total-amount"><%= Item[i].price * Order[0][i].qty%></span></p>
                 </div>
                 <div class="buttons">
-                    <a href="/deleteorder/<%= Order[i].order_id %>" class="btn btn-warning mx-2">Accept</a>
+                    <a href="/deleteorder/<%= Order[0][i].order_id %>" class="btn btn-warning mx-2">Accept</a>
                 </div>
             </div>
         <% } %>
     </center>
     <center><a href="/menu1">Back to Menu</a></center>
 
-    <script>
-        function calculateTotal() {
-            var items = document.querySelectorAll('.Order');
-            items.forEach(function (item) {
-                var itemId = item.querySelector('.item-id:nth-child(2)').textContent.split(':')[1].trim();
-                var quantity = parseInt(item.querySelector('.quantity').textContent.split(':')[1].trim());
-                fetch(`/getPrice?itemId=${itemId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        var price = data.Price;
-                        var total = Price * quantity;
-                        item.querySelector('.total-amount').textContent = '฿' + total.toFixed(2);
-                        item.querySelector('.total').textContent = `Total: ฿${Price} * ${quantity} = ฿${total.toFixed(2)}`;
-                    });
-            });
-        }
-
-        window.onload = calculateTotal;
-    </script>
 </body>
 </html>
