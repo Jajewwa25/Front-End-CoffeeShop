@@ -8,8 +8,8 @@ const { clearConfigCache } = require("prettier");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
-//const base_url = "http://node59554-env-5865143.proen.app.ruk-com.cloud";
-const base_url = "http://localhost:3000";
+const base_url = "http://node60288-env-5840162.proen.app.ruk-com.cloud:11981";
+//const base_url = "http://localhost:3000";
 //"body-parser": "^1.20.2";
 
 app.set("view engine", "ejs");
