@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/order1.css"/>
     <title>Order Details</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&display=swap');
         .Order {
             border: 1px solid #ccc;
             padding: 10px;
@@ -13,22 +14,61 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 60%;
+            width: 85%; /* กำหนดความกว้างของกรอบเป็น 80% */
+            min-width: 400px; /* กำหนดความกว้างขั้นต่ำเพื่อป้องกันการหดหรือทับกัน */
         }
+
         .Order p {
             margin: 0;
         }
-        .buttons {
-            display: flex;
-            gap: 10px;
-        }
+        
         .textD p {
             display: inline-block;
             margin: 5px 10px;
         }
+
+        .buttons a {
+            font-size: 14px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px;
+            color: #2c3e50;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.2s;
+        }
+
+        a:hover {
+            border-bottom-color: #fed330;
+        }
+
+        .link-center {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .link-center a {
+            display: inline-block;
+            margin: 10px;
+            color: #fed330;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom-color 0.2s;
+        }
+
+        .link-center a:hover {
+            border-bottom-color: #fed330;
+        }
     </style>
 </head>
 <body>
+    <br><br>
     <h1>Order Details</h1>
     <center>
         <% for(let i = 0; i < Order[0].length; i++) { %>
@@ -48,7 +88,7 @@
             </div>
         <% } %>
     </center>
-    <center><a href="/menu1">Back to Menu</a></center>
+   <center><a href="/menu1">Back to Menu</a></center>
 
 </body>
 </html>
