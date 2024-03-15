@@ -285,6 +285,7 @@ app.post("/updatecustomer/:id", authenticateUser, async (req, res) => {
   try {
     const data = {
       username: req.body.username,
+      password: req.body.password,
       tel: req.body.tel,
       email: req.body.email,
       date: req.body.date,
