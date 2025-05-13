@@ -262,6 +262,31 @@ app.get("/cart", authenticateUser, async (req, res) => {
   res.render("cart", { cart, cartTotalQty });  // ส่ง cartTotalQty ไปด้วย
 });
 
+app.post('/remove-from-cart', (req, res) => {
+  const itemId = parseInt(req.body.item_id);
+  const customer_id = req.session.user?.customer_id;
+
+  if (!customer_id) {
+    return res.status(401).send("Unauthorized");
+  }
+
+  // ตรวจสอบว่ามี carts หรือยัง
+  if (!req.session.carts) {
+    req.session.carts = {};
+  }
+
+  if (!req.session.carts[customer_id]) {
+    req.session.carts[customer_id] = [];
+  }
+
+  // ลบสินค้าที่ item_id ตรงกัน
+  req.session.carts[customer_id] = req.session.carts[customer_id].filter(
+    item => item.item_id !== itemId
+  );
+
+  // redirect กลับไปหน้าตะกร้า
+  res.redirect('/cart');
+});
 
 //menu for Admin
 app.get("/menu1", authenticateUser, async (req, res) => {
