@@ -20,34 +20,34 @@
                         <th>Qty</th>
                         <th>Price</th>
                         <th>Total</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% let total = 0; %>
-                    <% cart.forEach(item => { %>
-                        <tr>
-                            <td><%= item.itemname %></td> <!-- แสดงชื่อสินค้า -->
-                            <td><%= item.qty %></td>
-                            <td>
-                                <% if (item.price && !isNaN(item.price)) { %>
-                                  ฿<%= item.price.toFixed(2) %> <!-- แสดงราคา -->
-                                <% } else { %>
-                                  ฿0.00
-                                <% } %>
-                            </td>
-                            <td>
-                                <% if (item.price && item.qty && !isNaN(item.price) && !isNaN(item.qty)) { %>
-                                  ฿<%= (item.price * item.qty).toFixed(2) %>
-                                <% } else { %>
-                                  ฿0.00
-                                <% } %>
-                            </td>
-                        
-                        </tr>
-                        <% total += (item.price && item.qty) ? (item.price * item.qty) : 0; %>
-                    <% }) %>
+                <% let total = 0; %>
+                <% cart.forEach(item => { %>
+                    <tr>
+                    <td><%= item.itemname %></td>
+                    <td><%= item.qty %></td>
+                    <td>
+                        <% if (item.price && !isNaN(item.price)) { %>
+                        ฿<%= parseFloat(item.price).toFixed(2) %>
+                        <% } else { %>
+                        ฿0.00
+                        <% } %>
+                    </td>
+                    <td>
+                        <% if (item.price && item.qty && !isNaN(item.price) && !isNaN(item.qty)) { %>
+                        ฿<%= (parseFloat(item.price) * parseInt(item.qty)).toFixed(2) %>
+                        <% } else { %>
+                        ฿0.00
+                        <% } %>
+                    </td>
+                    </tr>
+                    <% total += (item.price && item.qty) ? (parseFloat(item.price) * parseInt(item.qty)) : 0; %>
+                <% }) %>
                 </tbody>
-                
+     
             </table>
             <h4 class="text-end">Total: ฿<%= total.toFixed(2) %></h4>
             <center><button type="submit" class="btn-add-to-cart">Place an order 🛒</button></center>

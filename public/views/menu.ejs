@@ -17,7 +17,10 @@
             <li><a href="/about">About</a></li>
             <li><a href="/menu">Menu</a></li>
             <li><a href="/logout">Log out</a></li>
-            <li><a href="/add-to-cart">🛒</a></li>
+            <li><a href="/cart">
+                🛒 <span id="cart-count"><%= cartTotalQty %></span>
+                </a>
+            </li>
         </ul> 
     </nav>
 </header>
@@ -37,14 +40,20 @@
                             <img class="card-img-top" src="../uploaded_img/<%= Item[i].img %>" alt="Card image cap">
                             <div class="card-body">
                                 <form action="/add-to-cart" method="post">
+                                    <h5 class="card-title"><%= Item[i].itemname %></h5>
+                                    <p class="card-text">Price: <%= parseFloat(Item[i].price).toFixed(2) %></p>
                                     <input type="hidden" name="item_id" value="<%= Item[i].item_id %>">
                                     <input type="hidden" name="itemname" value="<%= Item[i].itemname %>">
                                     <input type="hidden" name="price" value="<%= Item[i].price %>">
                                     <input type="hidden" name="customer_id" value="<%= user.customer_id %>">                             
-                                    <input type="number" name="qty" class="form-control" min="1" max="99" value="1">
-                                    <br>
+                                    <input type="number" id="qty-<%= Item[i].item_id %>" name="qty" class="form-control" min="1" max="99" value="1">
+                                    
                                     <div class="d-flex justify-content-center mt-2">
-                                        <button type="submit" class="btn-add-to-cart">Add to cart 🛒</button>
+                                        <button type="button" 
+                                                class="btn btn-warning mx-2" 
+                                                onclick="addToCart('<%= Item[i].item_id %>', '<%= Item[i].itemname %>', '<%= Item[i].price %>')">
+                                            Add to cart 🛒
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -55,10 +64,37 @@
             </div>
         </div>
     </div>
-    
-    
-    
+
+    <script>
+async function addToCart(item_id, itemname, price) {
+    const qty = document.querySelector(`#qty-${item_id}`).value; // ดึงค่าจำนวนสินค้าจาก input field
+
+    const res = await fetch("/add-to-cart", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            item_id,
+            itemname,
+            price,
+            qty,  // ส่งข้อมูลจำนวนสินค้าไปด้วย
+        }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+        // อัปเดตตัวเลขบนไอค่อนตะกร้า
+        document.getElementById("cart-count").innerText = data.totalQty;
+    } else {
+        alert("เกิดข้อผิดพลาดในการเพิ่มสินค้า");
+    }
+}
+</script>
+
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -15,6 +15,7 @@ const base_url = "http://localhost:3000";
 app.set("view engine", "ejs");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set("views", path.join(__dirname, "/public/views"));
 app.use(session({
@@ -200,52 +201,65 @@ app.get("/menu", authenticateUser, async (req, res) => {
   try {
     const response = await axios.get(base_url + "/menu");
 
-    // ไม่จำเป็นต้องตั้ง req.session.user ใหม่ ถ้ามี authenticateUser จัดการแล้ว
-    res.render("menu", { Item: response.data, user: req.session.user });
+    // ดึงข้อมูลตะกร้าจาก session
+    const customer_id = req.session.user?.customer_id;
+    const cart = req.session.carts?.[customer_id] || [];
+
+    // คำนวณจำนวนสินค้าในตะกร้า
+    const cartTotalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+
+    // ส่งข้อมูลไปยัง view
+    res.render("menu", { Item: response.data, user: req.session.user, cartTotalQty });
   } catch (err) {
     console.error(err);
     return res.status(500).send("เกิดข้อผิดพลาดจากเซิร์ฟเวอร์");
   }
 });
 
-app.post("/add-to-cart", authenticateUser, async (req, res) => {
-  const { item_id, itemname, price, qty } = req.body;
+app.post('/add-to-cart', (req, res) => {
+    const { item_id, itemname, price, qty } = req.body;
+    const customer_id = req.session.user?.customer_id;
 
-  const customer_id = req.session.user?.customer_id;
-  if (!customer_id) {
-    return res.status(401).send("Unauthorized: No customer_id");
-  }
+    if (!customer_id) {
+        return res.status(400).json({ success: false, message: "User not logged in" });
+    }
 
-  if (!item_id || !itemname || isNaN(price) || isNaN(qty)) {
-    return res.status(400).send("Invalid product details.");
-  }
+    if (!req.session.carts) {
+        req.session.carts = {};
+    }
 
-  // Ensure cart object exists and is scoped by customer_id
-  if (!req.session.carts) req.session.carts = {};
-  if (!req.session.carts[customer_id]) req.session.carts[customer_id] = [];
+    if (!req.session.carts[customer_id]) {
+        req.session.carts[customer_id] = [];
+    }
 
-  const cart = req.session.carts[customer_id];
-  const existingItem = cart.find(item => item.item_id === item_id);
+    const cart = req.session.carts[customer_id];
 
-  if (existingItem) {
-    existingItem.qty += parseInt(qty);
-  } else {
-    cart.push({
-      item_id,
-      itemname,
-      price: parseFloat(price),
-      qty: parseInt(qty),
-    });
-  }
+    // ตรวจสอบว่ามีสินค้านี้อยู่ในตะกร้าหรือไม่
+    const existingItem = cart.find(item => item.item_id === item_id);
 
-  res.redirect("/cart");
+    if (existingItem) {
+        // หากมีสินค้าชิ้นนี้แล้ว, ให้เพิ่มจำนวนสินค้า
+        existingItem.qty += parseInt(qty);
+    } else {
+        // หากไม่มี, เพิ่มสินค้านี้ไปในตะกร้า
+        cart.push({ item_id, itemname, price, qty: parseInt(qty) });
+    }
+
+    // คำนวณจำนวนสินค้าในตะกร้าทั้งหมด
+    const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+
+    res.json({ success: true, totalQty });
 });
 
 //cart
 app.get("/cart", authenticateUser, async (req, res) => {
   const customer_id = req.session.user?.customer_id;
   const cart = req.session.carts?.[customer_id] || [];
-  res.render("cart", { cart });
+  
+  // ประกาศและคำนวณ cartTotalQty 
+  const cartTotalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  
+  res.render("cart", { cart, cartTotalQty });  // ส่ง cartTotalQty ไปด้วย
 });
 
 
