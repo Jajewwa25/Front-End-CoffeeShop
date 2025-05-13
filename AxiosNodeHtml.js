@@ -260,6 +260,12 @@ app.post("/add-to-cart", authenticateUser, async (req, res) => {
   res.redirect("/cart");
 });
 
+//cart
+app.get("/cart", async (req, res) => {
+  const cart = req.session.cart || [];
+  res.render("cart", { cart });
+})
+
 
 //menu for Admin
 app.get("/menu1", authenticateUser, async (req, res) => {
@@ -526,11 +532,7 @@ app.post("/addemployee", upload.single("img"), authenticateUser, async (req, res
 }
 );
 
-//cart
-app.get("/cart", async (req, res) => {
-  const cart = req.session.cart || [];
-  res.render("cart", { cart });
-})
+
 
 app.listen(5500, () => {
   console.log("server started on port 5500");
