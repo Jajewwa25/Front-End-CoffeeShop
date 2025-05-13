@@ -17,13 +17,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.set("views", path.join(__dirname, "/public/views"));
-app.use(
-  session({
-    secret: "keyboard cat",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+app.use(session({
+  secret: 'your-secret',
+  resave: false,
+  saveUninitialized: true,
+  // store: ใช้ store จริงใน production เช่น connect-mongo, redis ฯลฯ
+}));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -197,74 +196,57 @@ app.get("/about", authenticateUser, async (req, res) => {
   }
 });
 
-//menu for customer
 app.get("/menu", authenticateUser, async (req, res) => {
   try {
     const response = await axios.get(base_url + "/menu");
 
-    if (!req.session.user) {
-      console.log("Logged in");
-      req.session.user = {
-        customer_id: "0",
-      };
-    }
-
+    // ไม่จำเป็นต้องตั้ง req.session.user ใหม่ ถ้ามี authenticateUser จัดการแล้ว
     res.render("menu", { Item: response.data, user: req.session.user });
   } catch (err) {
     console.error(err);
-    res.status(500).send("error");
-    res.redirect("/");
+    return res.status(500).send("เกิดข้อผิดพลาดจากเซิร์ฟเวอร์");
   }
 });
 
 app.post("/add-to-cart", authenticateUser, async (req, res) => {
-  let { item_id, itemname, price, qty } = req.body;
+  const { item_id, itemname, price, qty } = req.body;
 
-  console.log("Request Body:", req.body);
+  const customer_id = req.session.user?.customer_id;
+  if (!customer_id) {
+    return res.status(401).send("Unauthorized: No customer_id");
+  }
 
-
-  // ตรวจสอบว่า item_id, itemname, price, qty ถูกส่งมาหรือไม่
   if (!item_id || !itemname || isNaN(price) || isNaN(qty)) {
     return res.status(400).send("Invalid product details.");
   }
 
-  // ในกรณีนี้ไม่จำเป็นต้องใช้ [0] เพราะเราได้รับค่าของ itemname เป็น string
-  item_id = item_id[0];  // ใช้ [0] หากค่าที่ส่งมาเป็น array
-  itemname = itemname;    // ไม่ต้องใช้ [0] ถ้าเป็น string
-  price = parseFloat(price);
-  qty = parseInt(qty);
+  // Ensure cart object exists and is scoped by customer_id
+  if (!req.session.carts) req.session.carts = {};
+  if (!req.session.carts[customer_id]) req.session.carts[customer_id] = [];
 
-  console.log('Received values:', req.body);
-
-  if (!req.session.cart) {
-    req.session.cart = [];
-  }
-
-  // หาว่าสินค้าเคยถูกเพิ่มไว้แล้วหรือไม่
-  const existingItem = req.session.cart.find(item => item.item_id === item_id);
+  const cart = req.session.carts[customer_id];
+  const existingItem = cart.find(item => item.item_id === item_id);
 
   if (existingItem) {
-    // ถ้ามีสินค้าแล้วเพิ่มจำนวน
-    existingItem.qty += qty;
+    existingItem.qty += parseInt(qty);
   } else {
-    // ถ้ายังไม่มีสินค้าในตะกร้า
-    req.session.cart.push({
+    cart.push({
       item_id,
       itemname,
-      price,
-      qty,
+      price: parseFloat(price),
+      qty: parseInt(qty),
     });
   }
 
-  // เมื่อเพิ่มสินค้าแล้ว redirect ไปที่หน้า cart
   res.redirect("/cart");
 });
 
 //cart
-app.get("/cart", async (req, res) => {
-  const cart = req.session.cart || [];
+app.get("/cart", authenticateUser, async (req, res) => {
+  const customer_id = req.session.user?.customer_id;
+  const cart = req.session.carts?.[customer_id] || [];
   res.render("cart", { cart });
-})
+});
 
 
 //menu for Admin
